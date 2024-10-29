@@ -63,7 +63,8 @@ format:
     code-copy: true
     code-fold: true
   pdf:
-    lang: es
+    pdf-engine: pdflatex
+    lang: es-MX
     include-in-header:
       - packa.tex
     documentclass: scrreprt
@@ -73,5 +74,6 @@ format:
     email: joseitalosanchezbermudez@gmail.com
     keep-tex: true
 editor: visual
+
 
 
