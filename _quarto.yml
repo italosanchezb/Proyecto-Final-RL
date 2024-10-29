@@ -1,0 +1,77 @@
+project:
+  type: book
+  output-dir: _book
+
+website:
+  favicon: escudo-unison-logo.png
+  reader-mode: true
+  search:
+    location: sidebar
+    type: overlay
+  comments:
+    hypothesis: true
+
+book:
+  title: "Análisis Futbol"
+  reader-mode: true
+  language: es
+  date: "02/14/2024"
+  output-file: "Proyecto RL"
+  # image: logofcfm.png
+  # cover-image: FCFMLOGO.png
+  sharing: [twitter, facebook]
+  downloads: [pdf]
+  # favicon: logofcfm.png
+  sidebar:
+  #  logo: LOGO50.png
+    style: floating
+    collapse-level: 2
+    border: true
+    search: true
+  open-graph: true
+  twitter-card: true
+  #repo-url: 
+  repo-actions: [edit, issue, source]
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - formulacion.qmd
+    - modelo.qmd
+    - descripcion.qmd
+    - justificacion.qmd
+    - references.qmd
+
+comments:
+    hypothesis: true
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      dark: lux
+      light: lux
+    highlight-style: a11y
+    lang: es
+    html-math-method: mathjax
+    grid:
+      sidebar-width: 200px
+      body-width: 1300px
+      margin-width: 300px
+      gutter-width: .5rem
+    code-copy: true
+    code-fold: true
+  pdf:
+    lang: es
+    include-in-header:
+      - packa.tex
+    documentclass: scrreprt
+    papersize: us-letter
+    #titlegraphic: FCFMLOGO.png
+    institution: Universidad de Sonora
+    email: joseitalosanchezbermudez@gmail.com
+    keep-tex: true
+editor: visual
+
+
