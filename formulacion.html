@@ -77,10 +77,41 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="2&nbsp; Formulación – Análisis Futbol">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Análisis Futbol">
 <meta name="twitter:title" content="2&nbsp; Formulación – Análisis Futbol">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -165,19 +196,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">modelo.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descripcion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">descripcion.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./justificacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">justificacion.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -216,6 +247,33 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>El Proceso de Decisión de Markov se compone de los siguientes elementos:</p>
+<ul>
+<li><p>El conjunto de estados estará conformado por las 3 divisiones del campo <span class="math inline">\(c_1,c_2,c_3\)</span>, además se agregan tres estados absorbentes:</p>
+<ul>
+<li><span class="math inline">\(lp =\)</span> pérdida de posesión del balón.</li>
+<li><span class="math inline">\(ng =\)</span> realizar un tiro y que no termine en gol.</li>
+<li><span class="math inline">\(g =\)</span> realizar un tiro y que termine en gol. De esta forma el conjunto de estados <span class="math inline">\(\mathcal{S}\)</span> queda como</li>
+</ul>
+<p><span class="math display">\[
+  \mathcal{S}=\{c_1,c_2,c_3,lp,ng,g\}
+  \]</span></p></li>
+<li><p>El conjunto de acciones admisibles se considerarán 3 acciones que serán</p>
+<ul>
+<li><span class="math inline">\(t\)</span> = tiro</li>
+<li><span class="math inline">\(p\)</span> = pase</li>
+<li><span class="math inline">\(r\)</span> = regate De esta forma el conjunto de acciones queda como <span class="math display">\[\mathcal{A} = \{t,p,r\}\]</span></li>
+</ul></li>
+<li><p>Para las de transiciones haremos uso de las probabilidades de transición definidas de la siguiente forma: <span class="math display">\[
+P:\mathcal{S}\times\mathcal{A}\times\mathcal{S} \to [0,1]
+\]</span></p>
+<p>Que se interpreta como la probabilidad de estar en un estado <span class="math inline">\(s_i\)</span> realizar una acción <span class="math inline">\(a_k\)</span> y terminar en un estado <span class="math inline">\(s_j\)</span>. Notemos que se aceptan los casos cuando <span class="math inline">\(i=j\)</span> y más adelante se mostrará que algunas probabilidades serán 0. La función de recompensa <span class="math inline">\(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\)</span> será <span class="math display">\[
+R(s_i,a_k,s_j)=\left\{\begin{array}{ccc}
+              1 &amp; \text{si} &amp; s_j=g  \\
+              0 &amp; o.c. &amp;
+         \end{array}\right.
+\]</span></p></li>
+</ul>
 
 
 
@@ -791,8 +849,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./modelo.html" class="pagination-link" aria-label="modelo.html">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">modelo.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./modelo.html" class="pagination-link" aria-label="Dinámica del modelo">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
