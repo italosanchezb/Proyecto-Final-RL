@@ -262,17 +262,19 @@ window.Quarto = {
 <ul>
 <li><span class="math inline">\(t\)</span> = tiro</li>
 <li><span class="math inline">\(p\)</span> = pase</li>
-<li><span class="math inline">\(r\)</span> = regate De esta forma el conjunto de acciones queda como <span class="math display">\[\mathcal{A} = \{t,p,r\}\]</span></li>
-</ul></li>
+<li><span class="math inline">\(r\)</span> = regate</li>
+</ul>
+<p>De esta forma el conjunto de acciones queda como <span class="math display">\[\mathcal{A} = \{t,p,r\}\]</span></p></li>
 <li><p>Para las de transiciones haremos uso de las probabilidades de transición definidas de la siguiente forma: <span class="math display">\[
 P:\mathcal{S}\times\mathcal{A}\times\mathcal{S} \to [0,1]
 \]</span></p>
-<p>Que se interpreta como la probabilidad de estar en un estado <span class="math inline">\(s_i\)</span> realizar una acción <span class="math inline">\(a_k\)</span> y terminar en un estado <span class="math inline">\(s_j\)</span>. Notemos que se aceptan los casos cuando <span class="math inline">\(i=j\)</span> y más adelante se mostrará que algunas probabilidades serán 0. La función de recompensa <span class="math inline">\(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\)</span> será <span class="math display">\[
-R(s_i,a_k,s_j)=\left\{\begin{array}{ccc}
-              1 &amp; \text{si} &amp; s_j=g  \\
-              0 &amp; o.c. &amp;
-         \end{array}\right.
-\]</span></p></li>
+<p>Que se interpreta como la probabilidad de estar en un estado <span class="math inline">\(s_i\)</span> realizar una acción <span class="math inline">\(a_k\)</span> y terminar en un estado <span class="math inline">\(s_j\)</span>. Notemos que se aceptan los casos cuando <span class="math inline">\(i=j\)</span> y más adelante se mostrará que algunas probabilidades serán 0.</p></li>
+<li><p>La función de recompensa <span class="math inline">\(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\)</span> será <span class="math display">\[
+  R(s_i,a_k,s_j)=\left\{\begin{array}{ccc}
+               1 &amp; \text{si} &amp; s_j=g  \\
+               0 &amp; o.c. &amp;
+          \end{array}\right.
+  \]</span></p></li>
 </ul>
 
 
