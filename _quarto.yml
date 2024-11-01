@@ -69,7 +69,7 @@ format:
       - packa.tex
     documentclass: scrreprt
     papersize: us-letter
-    #titlegraphic: FCFMLOGO.png
+    titlegraphic: escudo-unison-logo.png
     institution: Universidad de Sonora
     email: joseitalosanchezbermudez@gmail.com
     keep-tex: true

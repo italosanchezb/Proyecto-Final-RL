@@ -77,10 +77,41 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Análisis Futbol">
 <meta name="twitter:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -171,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descripcion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">descripcion.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -216,6 +247,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>En el contexto del fútbol llamamos <em>jugada</em> a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.</p>
+<p><em>Ejemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.</em></p>
+<p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(c_i\)</span> y terminar en alguno de los 3 estados absorbentes. <em>Ejemplo</em> <span class="math display">\[
+c_1\xrightarrow{p}c_1\xrightarrow{p}c_3\xrightarrow{r}lp.
+\]</span></p>
+<p>Para movernos de un estado <span class="math inline">\(s_i\)</span> a un estado <span class="math inline">\(s_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.</p>
 
 
 
@@ -791,8 +828,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./descripcion.html" class="pagination-link" aria-label="descripcion.html">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">descripcion.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./descripcion.html" class="pagination-link" aria-label="Descripción y Justificación de la recompensa">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

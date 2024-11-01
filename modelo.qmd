@@ -1,1 +1,13 @@
 ## Dinámica del modelo
+ En el contexto del fútbol llamamos *jugada* a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.
+ 
+*Ejemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.*
+
+En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección $c_i$ y terminar en alguno de los 3 estados absorbentes.
+*Ejemplo*
+$$
+c_1\xrightarrow{p}c_1\xrightarrow{p}c_3\xrightarrow{r}lp.
+$$
+
+Para movernos de un estado $s_i$ a un estado $s_j$ mediante una acción $a_k$ haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.
+

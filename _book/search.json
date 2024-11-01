@@ -14,9 +14,49 @@
     "href": "intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. «Literate Programming». Comput. J. 27 (2): 97-111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "This is a book created from markdown and executable code.\nSee Van Roy et al. (2021) for additional discussion of literate programming.\n\n\n\n\nVan Roy, Maaike, Wen-Chi Yang, Luc De Raedt, y Jesse Davis. 2021. «Analyzing learned markov decision processes using model checking for providing tactical advice in professional soccer». En AI for Sports Analytics (AISA) Workshop at IJCAI 2021.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "formulacion.html",
+    "href": "formulacion.html",
+    "title": "2  Formulación",
+    "section": "",
+    "text": "El Proceso de Decisión de Markov se compone de los siguientes elementos:\n\nEl conjunto de estados estará conformado por las 3 divisiones del campo \\(c_1,c_2,c_3\\), además se agregan tres estados absorbentes:\n\n\\(lp =\\) pérdida de posesión del balón.\n\\(ng =\\) realizar un tiro y que no termine en gol.\n\\(g =\\) realizar un tiro y que termine en gol. De esta forma el conjunto de estados \\(\\mathcal{S}\\) queda como\n\n\\[\n  \\mathcal{S}=\\{c_1,c_2,c_3,lp,ng,g\\}\n  \\]\nEl conjunto de acciones admisibles se considerarán 3 acciones que serán\n\n\\(t\\) = tiro\n\\(p\\) = pase\n\\(r\\) = regate\n\nDe esta forma el conjunto de acciones queda como \\[\\mathcal{A} = \\{t,p,r\\}\\]\nPara las de transiciones haremos uso de las probabilidades de transición definidas de la siguiente forma: \\[\nP:\\mathcal{S}\\times\\mathcal{A}\\times\\mathcal{S} \\to [0,1]\n\\]\nQue se interpreta como la probabilidad de estar en un estado \\(s_i\\) realizar una acción \\(a_k\\) y terminar en un estado \\(s_j\\). Notemos que se aceptan los casos cuando \\(i=j\\) y más adelante se mostrará que algunas probabilidades serán 0.\nLa función de recompensa \\(R:\\mathcal{S}\\times \\mathcal{A}\\times \\mathcal{S}\\to[0,1]\\) será \\[\n  R(s_i,a_k,s_j)=\\left\\{\\begin{array}{ccc}\n               1 & \\text{si} & s_j=g  \\\\\n               0 & o.c. &\n          \\end{array}\\right.\n  \\]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Formulación</span>"
+    ]
+  },
+  {
+    "objectID": "modelo.html",
+    "href": "modelo.html",
+    "title": "3  Dinámica del modelo",
+    "section": "",
+    "text": "En el contexto del fútbol llamamos jugada a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.\nEjemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.\nEn nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección \\(c_i\\) y terminar en alguno de los 3 estados absorbentes. Ejemplo \\[\nc_1\\xrightarrow{p}c_1\\xrightarrow{p}c_3\\xrightarrow{r}lp.\n\\]\nPara movernos de un estado \\(s_i\\) a un estado \\(s_j\\) mediante una acción \\(a_k\\) haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dinámica del modelo</span>"
+    ]
+  },
+  {
+    "objectID": "descripcion.html#footnotes",
+    "href": "descripcion.html#footnotes",
+    "title": "4  Descripción y Justificación de la recompensa",
+    "section": "",
+    "text": "No se consideran los partidos de eliminación directa donde existe el desempate por penales.↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Descripción y Justificación de la recompensa</span>"
+    ]
+  },
+  {
+    "objectID": "justificacion.html",
+    "href": "justificacion.html",
+    "title": "5  Justificación de las acciones",
+    "section": "",
+    "text": "Las acciones que puede realizar un equipo durante un partido son limitadas y se pueden enlistar. Sin embargo para nuestro modelo vamos a seleccionar las 3 más importantes que son el pase, tiroy regate.\n\ntiro: Es la acción que nos permite anotar goles.\npase: Ayuda a un equipo a mover el balón por el campo sin necesidad de desplazarse o dejar rivales atrás.\nregate: Permite que podamos trasladar el balón de un lugar a otro y dejar a rivales atrás.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Justificación de las acciones</span>"
     ]
   },
   {
@@ -24,7 +64,7 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "Van Roy, Maaike, Wen-Chi Yang, Luc De Raedt, and Jesse Davis. 2021.\n“Analyzing Learned Markov Decision Processes Using Model Checking\nfor Providing Tactical Advice in Professional Soccer.” In AI\nfor Sports Analytics (AISA) Workshop at IJCAI 2021.",
     "crumbs": [
       "References"
     ]

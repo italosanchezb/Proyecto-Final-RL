@@ -1,1 +1,4 @@
 ## Descripción y Justificación de la recompensa
+ En un partido de fútbol gana el equipo que anota más goles, en caso de anotar los mismos goles se considera empate y no existe desempate de ningún tipo.[^1] Por lo que la recompensa será la de anotar un gol $R=1$, pues es lo único que puede hacer que un equipo gane un partido. No existe penalización porque los goles válidos anotados no pueden ser descontandos. 
+
+ [^1]: No se consideran los partidos de eliminación directa donde existe el desempate por penales.
