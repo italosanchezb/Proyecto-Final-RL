@@ -250,9 +250,254 @@ window.Quarto = {
 <p>En el contexto del fútbol llamamos <em>jugada</em> a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.</p>
 <p><em>Ejemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.</em></p>
 <p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(c_i\)</span> y terminar en alguno de los 3 estados absorbentes. <em>Ejemplo</em> <span class="math display">\[
-c_1\xrightarrow{p}c_1\xrightarrow{p}c_3\xrightarrow{r}lp.
+C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<p>Para movernos de un estado <span class="math inline">\(s_i\)</span> a un estado <span class="math inline">\(s_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.</p>
+<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.</p>
+<p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
+<ul>
+<li><p>Fijamos el estado <span class="math inline">\(C_1\)</span>.</p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_1,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_1,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_1,p,nG)=P(C_1,p,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_1,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_1,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_1,r,nG)=P(C_1,r,nG)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(nG,G\)</span> es <span class="math inline">\(t\)</span>.</p>
+<p>Además <span class="math inline">\(P(C_1,r,C_3)=0\)</span>, pues al realizar un <em>regate</em> solo tenemos dos opciones:</p>
+<p>nos mantenemos en la zona <span class="math inline">\(C_1\)</span> o avanzamos a la zona siguiente <span class="math inline">\(C_2\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_1,t,C_1)=P(C_1,t,C_2)=P(C_1,t,C_3)=P(C_1,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_1,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p>
+<p>Sin embargo, como suponemos que las acciones que toman las futbolistas son razonables, no tiene sentido realizar un <em>tiro</em> desde la zona <span class="math inline">\(C_1\)</span>, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto</p>
+<p><span class="math display">\[
+  P(C_1,t,S)=0,\hspace{0.5cm}\forall S\in \mathcal{S}.
+  \]</span></p></li>
+</ul></li>
+<li><p>Fijamos el estado <span class="math inline">\(C_2\)</span>.</p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_2,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_2,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y no tirar a gol.</p>
+<p><span class="math inline">\(P(C_2,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_2,p,nG)=P(C_2,p,nG)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_2,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_2,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_2,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_2,r,nG)=P(C_2,r,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_2,t,C_1)=P(C_2,t,C_2)=P(C_2,t,C_3)=P(C_2,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_2,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_2,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+</ul></li>
+<li><p>Fijamos el estado <span class="math inline">\(C_3\)</span></p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_3,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_3,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y no tirar a gol.</p>
+<p><span class="math inline">\(P(C_3,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_3,p,nG)=P(C_2,p,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_3,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_3,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_3,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_3,r,nG)=P(C_3,r,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p>
+<p>Además <span class="math inline">\(P(C_3,r,C_1)=0\)</span>, pues al realizar un <em>regate</em> solo tenemos dos opciones o nos mantenemos en la zona <span class="math inline">\(C_3\)</span> o retrocedemos a la zona anterior <span class="math inline">\(C_2\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_3,t,C_1)=P(C_3,t,C_2)=P(C_3,t,C_3)=P(C_3,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_3,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_3,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+</ul></li>
+<li><p>Por último como <span class="math inline">\(\{L_p,nG,G\}\)</span> son estados absorbentes, entonces <span class="math inline">\(\forall a\in\mathcal{A}.\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+    P(L_p,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = L_p\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+    P(nG,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = nG\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+    P(G,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = G\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<table class="caption-top table">
+<caption>Fruit prices</caption>
+<colgroup>
+<col style="width: 75%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,p,C_1)\)</span></td>
+<td><span class="math inline">\(\alpha_1\)</span></td>
+</tr>
+<tr class="even">
+<td>———————-</td>
+<td>————</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,p,C_2)\)</span></td>
+<td><span class="math inline">\(\alpha_2\)</span></td>
+</tr>
+<tr class="even">
+<td>———————-</td>
+<td>————</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,p,C_3)\)</span></td>
+<td><span class="math inline">\(\alpha_3\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_1,p,L_p)\)</span></td>
+<td><span class="math inline">\(\alpha_4\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,r,C_1)\)</span></td>
+<td><span class="math inline">\(\theta_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_1,r,C_2)\)</span></td>
+<td><span class="math inline">\(\theta_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,r,L_p)\)</span></td>
+<td><span class="math inline">\(\theta_4\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,p,C_1)\)</span></td>
+<td><span class="math inline">\(\beta_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,p,C_2)\)</span></td>
+<td><span class="math inline">\(\beta_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,p,C_3)\)</span></td>
+<td><span class="math inline">\(\beta_3\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,p,L_p)\)</span></td>
+<td><span class="math inline">\(\beta_4\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,r,C_1)\)</span></td>
+<td><span class="math inline">\(\mu_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,r,C_2)\)</span></td>
+<td><span class="math inline">\(\mu_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,r,C_3)\)</span></td>
+<td><span class="math inline">\(\mu_3\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,r,L_p)\)</span></td>
+<td><span class="math inline">\(\mu_4\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,t,nG)\)</span></td>
+<td><span class="math inline">\(\nu_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,t,G)\)</span></td>
+<td><span class="math inline">\(\nu_2\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,p,C_1)\)</span></td>
+<td><span class="math inline">\(\gamma_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,p,C_2)\)</span></td>
+<td><span class="math inline">\(\gamma_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,p,C_3)\)</span></td>
+<td><span class="math inline">\(\gamma_3\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,p,L_p)\)</span></td>
+<td><span class="math inline">\(\gamma_4\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,r,C_2)\)</span></td>
+<td><span class="math inline">\(\eta_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,r,C_3)\)</span></td>
+<td><span class="math inline">\(\eta_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,r,L_p)\)</span></td>
+<td><span class="math inline">\(\eta_3\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,t,nG)\)</span></td>
+<td><span class="math inline">\(\xi_1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,t,G)\)</span></td>
+<td><span class="math inline">\(\xi_2\)</span></td>
+</tr>
+</tbody>
+</table>
 
 
 
