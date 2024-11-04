@@ -252,7 +252,7 @@ window.Quarto = {
 <p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(c_i\)</span> y terminar en alguno de los 3 estados absorbentes. <em>Ejemplo</em> <span class="math display">\[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.</p>
+<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a>, <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> y <a href="https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM">Pumas</a> de la temporada 2023-2024</p>
 <p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
 <ul>
 <li><p>Fijamos el estado <span class="math inline">\(C_1\)</span>.</p>
@@ -351,12 +351,9 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
             0 &amp; o.c. &amp;
             \end{array}\right.
 \]</span></p>
+<p>Para facilitar las estimaciones se renombrarán cada probabiidad con los parámetros que se muestran en las siguientes tablas</p>
 <table class="caption-top table">
-<caption>Fruit prices</caption>
-<colgroup>
-<col style="width: 75%">
-<col style="width: 25%">
-</colgroup>
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_1\)</span></caption>
 <thead>
 <tr class="header">
 <th>Probabilidades</th>
@@ -366,43 +363,36 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(P(C_1,p,C_1)\)</span></td>
-<td><span class="math inline">\(\alpha_1\)</span></td>
+<td><span class="math inline">\(\alpha_{1p}\)</span></td>
 </tr>
 <tr class="even">
-<td>———————-</td>
-<td>————</td>
-</tr>
-<tr class="odd">
 <td><span class="math inline">\(P(C_1,p,C_2)\)</span></td>
-<td><span class="math inline">\(\alpha_2\)</span></td>
-</tr>
-<tr class="even">
-<td>———————-</td>
-<td>————</td>
+<td><span class="math inline">\(\alpha_{2p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_1,p,C_3)\)</span></td>
-<td><span class="math inline">\(\alpha_3\)</span></td>
+<td><span class="math inline">\(\alpha_{3p}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_1,p,L_p)\)</span></td>
-<td><span class="math inline">\(\alpha_4\)</span></td>
+<td><span class="math inline">\(\alpha_{4p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_1,r,C_1)\)</span></td>
-<td><span class="math inline">\(\theta_1\)</span></td>
+<td><span class="math inline">\(\alpha_{1r}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_1,r,C_2)\)</span></td>
-<td><span class="math inline">\(\theta_2\)</span></td>
+<td><span class="math inline">\(\alpha_{2r}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_1,r,L_p)\)</span></td>
-<td><span class="math inline">\(\theta_4\)</span></td>
+<td><span class="math inline">\(\alpha_{3r}\)</span></td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table">
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_2\)</span></caption>
 <thead>
 <tr class="header">
 <th>Probabilidades</th>
@@ -412,47 +402,48 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(P(C_2,p,C_1)\)</span></td>
-<td><span class="math inline">\(\beta_1\)</span></td>
+<td><span class="math inline">\(\beta_{1p}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_2,p,C_2)\)</span></td>
-<td><span class="math inline">\(\beta_2\)</span></td>
+<td><span class="math inline">\(\beta_{2p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_2,p,C_3)\)</span></td>
-<td><span class="math inline">\(\beta_3\)</span></td>
+<td><span class="math inline">\(\beta_{3p}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_2,p,L_p)\)</span></td>
-<td><span class="math inline">\(\beta_4\)</span></td>
+<td><span class="math inline">\(\beta_{4p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_2,r,C_1)\)</span></td>
-<td><span class="math inline">\(\mu_1\)</span></td>
+<td><span class="math inline">\(\beta_{1r}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_2,r,C_2)\)</span></td>
-<td><span class="math inline">\(\mu_2\)</span></td>
+<td><span class="math inline">\(\beta_{2r}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_2,r,C_3)\)</span></td>
-<td><span class="math inline">\(\mu_3\)</span></td>
+<td><span class="math inline">\(\beta_{3r}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_2,r,L_p)\)</span></td>
-<td><span class="math inline">\(\mu_4\)</span></td>
+<td><span class="math inline">\(\beta_{4r}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_2,t,nG)\)</span></td>
-<td><span class="math inline">\(\nu_1\)</span></td>
+<td><span class="math inline">\(\beta_{1t}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_2,t,G)\)</span></td>
-<td><span class="math inline">\(\nu_2\)</span></td>
+<td><span class="math inline">\(\beta_{1t}\)</span></td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table">
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_3\)</span></caption>
 <thead>
 <tr class="header">
 <th>Probabilidades</th>
@@ -462,39 +453,39 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(P(C_3,p,C_1)\)</span></td>
-<td><span class="math inline">\(\gamma_1\)</span></td>
+<td><span class="math inline">\(\gamma_{1p}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_3,p,C_2)\)</span></td>
-<td><span class="math inline">\(\gamma_2\)</span></td>
+<td><span class="math inline">\(\gamma_{2p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_3,p,C_3)\)</span></td>
-<td><span class="math inline">\(\gamma_3\)</span></td>
+<td><span class="math inline">\(\gamma_{3p}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_3,p,L_p)\)</span></td>
-<td><span class="math inline">\(\gamma_4\)</span></td>
+<td><span class="math inline">\(\gamma_{4p}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_3,r,C_2)\)</span></td>
-<td><span class="math inline">\(\eta_1\)</span></td>
+<td><span class="math inline">\(\gamma_{1r}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_3,r,C_3)\)</span></td>
-<td><span class="math inline">\(\eta_2\)</span></td>
+<td><span class="math inline">\(\gamma_{2r}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_3,r,L_p)\)</span></td>
-<td><span class="math inline">\(\eta_3\)</span></td>
+<td><span class="math inline">\(\gamma_{3r}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(P(C_3,t,nG)\)</span></td>
-<td><span class="math inline">\(\xi_1\)</span></td>
+<td><span class="math inline">\(\gamma_{1t}\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(P(C_3,t,G)\)</span></td>
-<td><span class="math inline">\(\xi_2\)</span></td>
+<td><span class="math inline">\(\gamma_{2t}\)</span></td>
 </tr>
 </tbody>
 </table>

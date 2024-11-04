@@ -249,15 +249,13 @@ window.Quarto = {
 
 <p>El Proceso de Decisión de Markov se compone de los siguientes elementos:</p>
 <ul>
-<li><p>El conjunto de estados estará conformado por las 3 divisiones del campo <span class="math inline">\(c_1,c_2,c_3\)</span>, además se agregan tres estados absorbentes:</p>
-<ul>
-<li><span class="math inline">\(lp =\)</span> pérdida de posesión del balón.</li>
-<li><span class="math inline">\(ng =\)</span> realizar un tiro y que no termine en gol.</li>
-<li><span class="math inline">\(g =\)</span> realizar un tiro y que termine en gol. De esta forma el conjunto de estados <span class="math inline">\(\mathcal{S}\)</span> queda como</li>
+<li>El conjunto de estados estará conformado por las 3 divisiones del campo <span class="math inline">\(C_1,C_2,C_3\)</span>.</li>
 </ul>
-<p><span class="math display">\[
-  \mathcal{S}=\{c_1,c_2,c_3,lp,ng,g\}
-  \]</span></p></li>
+<p>Además se agregan tres estados absorbentes: + <span class="math inline">\(L_p =\)</span> pérdida de posesión del balón. + <span class="math inline">\(nG =\)</span> realizar un tiro y que no termine en gol. + <span class="math inline">\(G =\)</span> realizar un tiro y que termine en gol. De esta forma el conjunto de estados <span class="math inline">\(\mathcal{S}\)</span> queda como</p>
+<pre><code>$$
+\mathcal{S}=\{C_1,C_2,C_3,L_p,nG,G\}
+$$</code></pre>
+<ul>
 <li><p>El conjunto de acciones admisibles se considerarán 3 acciones que serán</p>
 <ul>
 <li><span class="math inline">\(t\)</span> = tiro</li>
@@ -268,10 +266,10 @@ window.Quarto = {
 <li><p>Para las de transiciones haremos uso de las probabilidades de transición definidas de la siguiente forma: <span class="math display">\[
 P:\mathcal{S}\times\mathcal{A}\times\mathcal{S} \to [0,1]
 \]</span></p>
-<p>Que se interpreta como la probabilidad de estar en un estado <span class="math inline">\(s_i\)</span> realizar una acción <span class="math inline">\(a_k\)</span> y terminar en un estado <span class="math inline">\(s_j\)</span>. Notemos que se aceptan los casos cuando <span class="math inline">\(i=j\)</span> y más adelante se mostrará que algunas probabilidades serán 0.</p></li>
-<li><p>La función de recompensa <span class="math inline">\(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\)</span> será <span class="math display">\[
-  R(s_i,a_k,s_j)=\left\{\begin{array}{ccc}
-               1 &amp; \text{si} &amp; s_j=g  \\
+<p>Que se interpreta como la probabilidad de estar en un estado <span class="math inline">\(S_i\)</span> realizar una acción <span class="math inline">\(a_k\)</span> y terminar en un estado <span class="math inline">\(S_j\)</span>. Notemos que se aceptan los casos cuando <span class="math inline">\(i=j\)</span> y más adelante se mostrará que algunas probabilidades serán 0.</p></li>
+<li><p>La función de recompensa <span class="math inline">\(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\)</span>, será <span class="math display">\[
+  R(S_i,a_k,S_j)=\left\{\begin{array}{ccc}
+               1 &amp; \text{si} &amp; S_j=G  \\
                0 &amp; o.c. &amp;
           \end{array}\right.
   \]</span></p></li>
