@@ -1,6 +1,7 @@
 ## Justificación de las acciones
-Las acciones que puede realizar un equipo durante un partido son limitadas y se pueden enlistar. Sin embargo para nuestro modelo vamos a seleccionar las 3 más importantes que son el *pase, tiro*y *regate*.
 
-* *tiro*: Es la acción que nos permite anotar goles.
-* *pase*: Ayuda a un equipo a mover el balón por el campo sin necesidad de desplazarse o dejar rivales atrás.
-* *regate*: Permite que podamos trasladar el balón de un lugar a otro y dejar a rivales atrás.
+Las acciones que puede realizar un equipo durante un partido son limitadas y se pueden enlistar. Sin embargo para nuestro modelo vamos a seleccionar las 3 más importantes que son el *pase, tiro* y *regate*.
+
+-   *tiro*: Es la acción que nos permite anotar goles.
+-   *pase*: Ayuda a un equipo a mover el balón por el campo sin necesidad de desplazarse o dejar rivales atrás.
+-   *regate*: Permite que podamos trasladar el balón de un lugar a otro y dejar a rivales atrás.

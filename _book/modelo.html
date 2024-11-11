@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Dinámica del modelo – Análisis Futbol</title>
+<title>2&nbsp; Dinámica del modelo – Análisis Futbol</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,10 +107,10 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta property="og:title" content="2&nbsp; Dinámica del modelo – Análisis Futbol">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Análisis Futbol">
-<meta name="twitter:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta name="twitter:title" content="2&nbsp; Dinámica del modelo – Análisis Futbol">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -124,7 +124,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelo.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelo.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -178,37 +178,31 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formulacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Formulación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formulación</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descripcion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./justificacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,7 +224,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></h1>
 </div>
 
 
@@ -249,10 +243,248 @@ window.Quarto = {
 
 <p>En el contexto del fútbol llamamos <em>jugada</em> a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.</p>
 <p><em>Ejemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.</em></p>
-<p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(c_i\)</span> y terminar en alguno de los 3 estados absorbentes. <em>Ejemplo</em> <span class="math display">\[
-c_1\xrightarrow{p}c_1\xrightarrow{p}c_3\xrightarrow{r}lp.
+<p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(C_i\)</span> y terminar en alguno de los 3 estados absorbentes.</p>
+<p><em>Ejemplo</em> <span class="math display">\[
+C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<p>Para movernos de un estado <span class="math inline">\(s_i\)</span> a un estado <span class="math inline">\(s_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de FBREF para 4 clubes particulares: Chivas, América, Cruz Azul y Pumas.</p>
+<p><img src="secuencia de ejemplo.png" class="img-fluid"></p>
+<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a>, <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> y <a href="https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM">Pumas</a> de la temporada 2023-2024</p>
+<p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
+<ul>
+<li><p>Fijamos el estado <span class="math inline">\(C_1\)</span>.</p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_1,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_1,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_1,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> dar un <em>pase</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_1,p,nG)=P(C_1,p,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_1,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_1,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_1,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_1,r,nG)=P(C_1,r,nG)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(nG,G\)</span> es <span class="math inline">\(t\)</span>.</p>
+<p>Además <span class="math inline">\(P(C_1,r,C_3)=0\)</span>, pues al realizar un <em>regate</em> solo tenemos dos opciones:</p>
+<p>nos mantenemos en la zona <span class="math inline">\(C_1\)</span> o avanzamos a la zona siguiente <span class="math inline">\(C_2\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_1,t,C_1)=P(C_1,t,C_2)=P(C_1,t,C_3)=P(C_1,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_1,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_1,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p>
+<p>Sin embargo, como suponemos que las acciones que toman las futbolistas son razonables, no tiene sentido realizar un <em>tiro</em> desde la zona <span class="math inline">\(C_1\)</span>, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto</p>
+<p><span class="math display">\[
+  P(C_1,t,S)=0,\hspace{0.5cm}\forall S\in \mathcal{S}.
+  \]</span></p></li>
+</ul></li>
+<li><p>Fijamos el estado <span class="math inline">\(C_2\)</span>.</p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_2,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_2,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_2,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y no tirar a gol.</p>
+<p><span class="math inline">\(P(C_2,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> dar un <em>pase</em> y terminar en gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_2,p,nG)=P(C_2,p,nG)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_2,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_2,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_2,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_2,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_2,r,nG)=P(C_2,r,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_2,t,C_1)=P(C_2,t,C_2)=P(C_2,t,C_3)=P(C_2,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_2,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_2,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+</ul></li>
+<li><p>Fijamos el estado <span class="math inline">\(C_3\)</span></p>
+<ul>
+<li><p>Consideramos la acción <span class="math inline">\(p\)</span>:</p>
+<p><span class="math inline">\(P(C_3,p,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_3,p,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_3,p,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y no tirar a gol.</p>
+<p><span class="math inline">\(P(C_3,p,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> dar un <em>pase</em> y terminar en gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(p\)</span> notemos que <span class="math inline">\(P(C_3,p,nG)=P(C_2,p,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(r\)</span>:</p>
+<p><span class="math inline">\(P(C_3,r,C_1)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_1\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,C_2)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_2\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,C_3)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y terminar en la zona <span class="math inline">\(C_3\)</span>.</p>
+<p><span class="math inline">\(P(C_3,r,L_p)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y perder el balón.</p>
+<p><span class="math inline">\(P(C_3,r,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_3,r,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>regate</em> y anotar gol.</p>
+<p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_3,r,nG)=P(C_3,r,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p>
+<p>Además <span class="math inline">\(P(C_3,r,C_1)=0\)</span>, pues al realizar un <em>regate</em> solo tenemos dos opciones o nos mantenemos en la zona <span class="math inline">\(C_3\)</span> o retrocedemos a la zona anterior <span class="math inline">\(C_2\)</span>.</p></li>
+<li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
+<p>En este caso tendremos que <span class="math inline">\(P(C_3,t,C_1)=P(C_3,t,C_2)=P(C_3,t,C_3)=P(C_3,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
+<p><span class="math inline">\(P(C_3,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_3,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+</ul></li>
+<li><p>Por último como <span class="math inline">\(\{L_p,nG,G\}\)</span> son estados absorbentes, entonces <span class="math inline">\(\forall a\in\mathcal{A}.\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+    P(L_p,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = L_p\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+    P(nG,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = nG\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<p><span class="math display">\[
+    P(G,a,S)=\left\{\begin{array}{ccc}
+            1 &amp; \text{si} &amp; S = G\\
+            0 &amp; o.c. &amp;
+            \end{array}\right.
+\]</span></p>
+<p>Para facilitar las estimaciones se renombrarán cada probabiidad con los parámetros que se muestran en las siguientes tablas</p>
+<table class="caption-top table">
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_1\)</span></caption>
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,p,C_1)\)</span></td>
+<td><span class="math inline">\(\alpha_{1p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_1,p,C_2)\)</span></td>
+<td><span class="math inline">\(\alpha_{2p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,p,C_3)\)</span></td>
+<td><span class="math inline">\(\alpha_{3p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_1,p,L_p)\)</span></td>
+<td><span class="math inline">\(\alpha_{4p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,r,C_1)\)</span></td>
+<td><span class="math inline">\(\alpha_{1r}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_1,r,C_2)\)</span></td>
+<td><span class="math inline">\(\alpha_{2r}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_1,r,L_p)\)</span></td>
+<td><span class="math inline">\(\alpha_{3r}\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_2\)</span></caption>
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,p,C_1)\)</span></td>
+<td><span class="math inline">\(\beta_{1p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,p,C_2)\)</span></td>
+<td><span class="math inline">\(\beta_{2p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,p,C_3)\)</span></td>
+<td><span class="math inline">\(\beta_{3p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,p,L_p)\)</span></td>
+<td><span class="math inline">\(\beta_{4p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,r,C_1)\)</span></td>
+<td><span class="math inline">\(\beta_{1r}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,r,C_2)\)</span></td>
+<td><span class="math inline">\(\beta_{2r}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,r,C_3)\)</span></td>
+<td><span class="math inline">\(\beta_{3r}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,r,L_p)\)</span></td>
+<td><span class="math inline">\(\beta_{4r}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_2,t,nG)\)</span></td>
+<td><span class="math inline">\(\beta_{1t}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_2,t,G)\)</span></td>
+<td><span class="math inline">\(\beta_{1t}\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<caption>Parámetros para las probabilidades de <span class="math inline">\(C_3\)</span></caption>
+<thead>
+<tr class="header">
+<th>Probabilidades</th>
+<th>Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,p,C_1)\)</span></td>
+<td><span class="math inline">\(\gamma_{1p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,p,C_2)\)</span></td>
+<td><span class="math inline">\(\gamma_{2p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,p,C_3)\)</span></td>
+<td><span class="math inline">\(\gamma_{3p}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,p,L_p)\)</span></td>
+<td><span class="math inline">\(\gamma_{4p}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,r,C_2)\)</span></td>
+<td><span class="math inline">\(\gamma_{1r}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,r,C_3)\)</span></td>
+<td><span class="math inline">\(\gamma_{2r}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,r,L_p)\)</span></td>
+<td><span class="math inline">\(\gamma_{3r}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(C_3,t,nG)\)</span></td>
+<td><span class="math inline">\(\gamma_{1t}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(C_3,t,G)\)</span></td>
+<td><span class="math inline">\(\gamma_{2t}\)</span></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -824,12 +1056,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./formulacion.html" class="pagination-link" aria-label="Formulación">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Formulación</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formulación</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./descripcion.html" class="pagination-link" aria-label="Descripción y Justificación de la recompensa">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

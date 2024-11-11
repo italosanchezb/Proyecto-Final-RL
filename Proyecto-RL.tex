@@ -236,24 +236,24 @@ programming.
 El Proceso de Decisión de Markov se compone de los siguientes elementos:
 
 \begin{itemize}
+\tightlist
 \item
   El conjunto de estados estará conformado por las 3 divisiones del
-  campo \(c_1,c_2,c_3\), además se agregan tres estados absorbentes:
+  campo \(C_1,C_2,C_3\).
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    \(lp =\) pérdida de posesión del balón.
-  \item
-    \(ng =\) realizar un tiro y que no termine en gol.
-  \item
-    \(g =\) realizar un tiro y que termine en gol. De esta forma el
-    conjunto de estados \(\mathcal{S}\) queda como
-  \end{itemize}
+Además se agregan tres estados absorbentes: + \(L_p =\) pérdida de
+posesión del balón. + \(nG =\) realizar un tiro y que no termine en gol.
++ \(G =\) realizar un tiro y que termine en gol. De esta forma el
+conjunto de estados \(\mathcal{S}\) queda como
 
-  \[
-    \mathcal{S}=\{c_1,c_2,c_3,lp,ng,g\}
-    \]
+\begin{verbatim}
+$$
+\mathcal{S}=\{C_1,C_2,C_3,L_p,nG,G\}
+$$
+\end{verbatim}
+
+\begin{itemize}
 \item
   El conjunto de acciones admisibles se considerarán 3 acciones que
   serán
@@ -276,15 +276,15 @@ El Proceso de Decisión de Markov se compone de los siguientes elementos:
    P:\mathcal{S}\times\mathcal{A}\times\mathcal{S} \to [0,1]
    \]
 
-  Que se interpreta como la probabilidad de estar en un estado \(s_i\)
-  realizar una acción \(a_k\) y terminar en un estado \(s_j\). Notemos
+  Que se interpreta como la probabilidad de estar en un estado \(S_i\)
+  realizar una acción \(a_k\) y terminar en un estado \(S_j\). Notemos
   que se aceptan los casos cuando \(i=j\) y más adelante se mostrará que
   algunas probabilidades serán 0.
 \item
   La función de recompensa
-  \(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\) será \[
-    R(s_i,a_k,s_j)=\left\{\begin{array}{ccc}
-                 1 & \text{si} & s_j=g  \\
+  \(R:\mathcal{S}\times \mathcal{A}\times \mathcal{S}\to[0,1]\), será \[
+    R(S_i,a_k,S_j)=\left\{\begin{array}{ccc}
+                 1 & \text{si} & S_j=G  \\
                  0 & o.c. &
             \end{array}\right.
     \]
@@ -307,13 +307,339 @@ y al intentar un regate pierde el balón.}
 En nuestro contexto se verá como el hecho de iniciar la sucesión de
 acciones desde alguna sección \(c_i\) y terminar en alguno de los 3
 estados absorbentes. \emph{Ejemplo} \[
-c_1\xrightarrow{p}c_1\xrightarrow{p}c_3\xrightarrow{r}lp.
+C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]
 
-Para movernos de un estado \(s_i\) a un estado \(s_j\) mediante una
+Para movernos de un estado \(S_i\) a un estado \(S_j\) mediante una
 acción \(a_k\) haremos uso de las probabilidades de transición, estas
-probabilidades las estimaremos utilizando datos extraídos de FBREF para
-4 clubes particulares: Chivas, América, Cruz Azul y Pumas.
+probabilidades las estimaremos utilizando datos extraídos de
+\href{https://fbref.com/es/}{FBREF} para 4 clubes:
+\href{https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara}{Chivas},
+\href{https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America}{América},
+\href{https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul}{Cruz
+Azul} y
+\href{https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM}{Pumas}
+de la temporada 2023-2024
+
+Primero vamos a interpretar las probabilidades de transición con la
+finalidad de descartar aquellas transciones que no serán posibles con
+nuestro modelo y con la naturaleza de un partido.
+
+\begin{itemize}
+\item
+  Fijamos el estado \(C_1\).
+
+  \begin{itemize}
+  \item
+    Consideramos la acción \(p\):
+
+    \(P(C_1,p,C_1)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y terminar en la zona \(C_1\).
+
+    \(P(C_1,p,C_2)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y terminar en la zona \(C_2\).
+
+    \(P(C_1,p,C_3)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y terminar en la zona \(C_3\).
+
+    \(P(C_1,p,L_p)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y perder el balón.
+
+    \(P(C_1,p,nG)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y no anotar gol.
+
+    \(P(C_1,p,G)=\) La probabilidad de estar en la zona \(C_1\) dar un
+    \emph{pase} y anotar gol.
+
+    De esta lista de probabilidades para la acción \(p\) notemos que
+    \(P(C_1,p,nG)=P(C_1,p,G)=0\) esto pues la única acción admisible
+    para terminar en los estados \(\{nG,G\}\) es \(t\).
+  \item
+    Consideramos la acción \(r\):
+
+    \(P(C_1,r,C_1)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{regate} y terminar en la zona \(C_1\).
+
+    \(P(C_1,r,C_2)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{regate} y terminar en la zona \(C_2\).
+
+    \(P(C_1,r,C_3)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{regate} y terminar en la zona \(C_3\).
+
+    \(P(C_1,r,L_p)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{regate} y perder el balón.
+
+    \(P(C_1,r,nG)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{regate} y no anotar gol.
+
+    \(P(C_1,r,G)=\) La probabilidad de estar en la zona \(C_1\) hacer un
+    \emph{regate} y anotar gol.
+
+    De esta lista de probabilidades para la acción \(r\) notemos que
+    \(P(C_1,r,nG)=P(C_1,r,nG)=0\) esto pues la única acción admisible
+    para terminar en los estados \(nG,G\) es \(t\).
+
+    Además \(P(C_1,r,C_3)=0\), pues al realizar un \emph{regate} solo
+    tenemos dos opciones:
+
+    nos mantenemos en la zona \(C_1\) o avanzamos a la zona siguiente
+    \(C_2\).
+  \item
+    Consideramos la acción \(t\):
+
+    En este caso tendremos que
+    \(P(C_1,t,C_1)=P(C_1,t,C_2)=P(C_1,t,C_3)=P(C_1,t,L_p)=0\) pues
+    después de realizar un \emph{tiro} solo tendremos dos estados
+    posibles \(\{nG,G\}\).
+
+    \(P(C_1,t,nG)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{tiro} y no anotar gol.
+
+    \(P(C_1,t,G)=\) La probabilidad de estar en la zona \(C_1\) hacer un
+    \emph{tiro} y anotar gol.
+
+    Sin embargo, como suponemos que las acciones que toman las
+    futbolistas son razonables, no tiene sentido realizar un \emph{tiro}
+    desde la zona \(C_1\), pues la distancia hacia la porteria contaría
+    es muy lejana y la probabilidad de anotar un gol es prácticamente
+    nula. Por tanto
+
+    \[
+      P(C_1,t,S)=0,\hspace{0.5cm}\forall S\in \mathcal{S}.
+      \]
+  \end{itemize}
+\item
+  Fijamos el estado \(C_2\).
+
+  \begin{itemize}
+  \item
+    Consideramos la acción \(p\):
+
+    \(P(C_2,p,C_1)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y terminar en la zona \(C_1\).
+
+    \(P(C_2,p,C_2)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y terminar en la zona \(C_2\).
+
+    \(P(C_2,p,C_3)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y terminar en la zona \(C_3\).
+
+    \(P(C_2,p,L_p)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y perder el balón.
+
+    \(P(C_2,p,nG)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y no tirar a gol.
+
+    \(P(C_2,p,G)=\) La probabilidad de estar en la zona \(C_2\) dar un
+    \emph{pase} y terminar en gol.
+
+    De esta lista de probabilidades para la acción \(p\) notemos que
+    \(P(C_2,p,nG)=P(C_2,p,nG)=0\) esto pues la única acción admisible
+    para terminar en los estados \(\{nG,G\}\) es \(t\).
+  \item
+    Consideramos la acción \(r\):
+
+    \(P(C_2,r,C_1)=\) La probabilidad de estar en la zona \(C_2\) hacer
+    un \emph{regate} y terminar en la zona \(C_1\).
+
+    \(P(C_2,r,C_2)=\) La probabilidad de estar en la zona \(C_2\) hacer
+    un \emph{regate} y terminar en la zona \(C_2\).
+
+    \(P(C_2,r,C_3)=\) La probabilidad de estar en la zona \(C_2\) hacer
+    un \emph{regate} y terminar en la zona \(C_3\).
+
+    \(P(C_2,r,L_p)=\) La probabilidad de estar en la zona \(C_2\) hacer
+    un \emph{regate} y perder el balón.
+
+    \(P(C_2,r,nG)=\) La probabilidad de estar en la zona \(C_2\) hacer
+    un \emph{regate} y no anotar gol.
+
+    \(P(C_2,r,G)=\) La probabilidad de estar en la zona \(C_2\) hacer un
+    \emph{regate} y anotar gol.
+
+    De esta lista de probabilidades para la acción \(r\) notemos que
+    \(P(C_2,r,nG)=P(C_2,r,G)=0\) esto pues la única acción admisible
+    para terminar en los estados \(\{nG,G\}\) es \(t\).
+  \item
+    Consideramos la acción \(t\):
+
+    En este caso tendremos que
+    \(P(C_2,t,C_1)=P(C_2,t,C_2)=P(C_2,t,C_3)=P(C_2,t,L_p)=0\) pues
+    después de realizar un \emph{tiro} solo tendremos dos estados
+    posibles \(\{nG,G\}\).
+
+    \(P(C_2,t,nG)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{tiro} y no anotar gol.
+
+    \(P(C_2,t,G)=\) La probabilidad de estar en la zona \(C_1\) hacer un
+    \emph{tiro} y anotar gol.
+  \end{itemize}
+\item
+  Fijamos el estado \(C_3\)
+
+  \begin{itemize}
+  \item
+    Consideramos la acción \(p\):
+
+    \(P(C_3,p,C_1)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y terminar en la zona \(C_1\).
+
+    \(P(C_3,p,C_2)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y terminar en la zona \(C_2\).
+
+    \(P(C_3,p,C_3)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y terminar en la zona \(C_3\).
+
+    \(P(C_3,p,L_p)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y perder el balón.
+
+    \(P(C_3,p,nG)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y no tirar a gol.
+
+    \(P(C_3,p,G)=\) La probabilidad de estar en la zona \(C_3\) dar un
+    \emph{pase} y terminar en gol.
+
+    De esta lista de probabilidades para la acción \(p\) notemos que
+    \(P(C_3,p,nG)=P(C_2,p,G)=0\) esto pues la única acción admisible
+    para terminar en los estados \(\{nG,G\}\) es \(t\).
+  \item
+    Consideramos la acción \(r\):
+
+    \(P(C_3,r,C_1)=\) La probabilidad de estar en la zona \(C_3\) hacer
+    un \emph{regate} y terminar en la zona \(C_1\).
+
+    \(P(C_3,r,C_2)=\) La probabilidad de estar en la zona \(C_3\) hacer
+    un \emph{regate} y terminar en la zona \(C_2\).
+
+    \(P(C_3,r,C_3)=\) La probabilidad de estar en la zona \(C_3\) hacer
+    un \emph{regate} y terminar en la zona \(C_3\).
+
+    \(P(C_3,r,L_p)=\) La probabilidad de estar en la zona \(C_3\) hacer
+    un \emph{regate} y perder el balón.
+
+    \(P(C_3,r,nG)=\) La probabilidad de estar en la zona \(C_3\) hacer
+    un \emph{regate} y no anotar gol.
+
+    \(P(C_3,r,G)=\) La probabilidad de estar en la zona \(C_3\) hacer un
+    \emph{regate} y anotar gol.
+
+    De esta lista de probabilidades para la acción \(r\) notemos que
+    \(P(C_3,r,nG)=P(C_3,r,G)=0\) esto pues la única acción admisible
+    para terminar en los estados \(\{nG,G\}\) es \(t\).
+
+    Además \(P(C_3,r,C_1)=0\), pues al realizar un \emph{regate} solo
+    tenemos dos opciones o nos mantenemos en la zona \(C_3\) o
+    retrocedemos a la zona anterior \(C_2\).
+  \item
+    Consideramos la acción \(t\):
+
+    En este caso tendremos que
+    \(P(C_3,t,C_1)=P(C_3,t,C_2)=P(C_3,t,C_3)=P(C_3,t,L_p)=0\) pues
+    después de realizar un \emph{tiro} solo tendremos dos estados
+    posibles \(\{nG,G\}\).
+
+    \(P(C_3,t,nG)=\) La probabilidad de estar en la zona \(C_1\) hacer
+    un \emph{tiro} y no anotar gol.
+
+    \(P(C_3,t,G)=\) La probabilidad de estar en la zona \(C_1\) hacer un
+    \emph{tiro} y anotar gol.
+  \end{itemize}
+\item
+  Por último como \(\{L_p,nG,G\}\) son estados absorbentes, entonces
+  \(\forall a\in\mathcal{A}.\)
+\end{itemize}
+
+\[
+    P(L_p,a,S)=\left\{\begin{array}{ccc}
+            1 & \text{si} & S = L_p\\
+            0 & o.c. &
+            \end{array}\right. 
+\]
+
+\[
+    P(nG,a,S)=\left\{\begin{array}{ccc}
+            1 & \text{si} & S = nG\\
+            0 & o.c. &
+            \end{array}\right. 
+\]
+
+\[
+    P(G,a,S)=\left\{\begin{array}{ccc}
+            1 & \text{si} & S = G\\
+            0 & o.c. &
+            \end{array}\right. 
+\]
+
+Para facilitar las estimaciones se renombrarán cada probabiidad con los
+parámetros que se muestran en las siguientes tablas
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Parámetros para las probabilidades de \(C_1\)}\tabularnewline
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(P(C_1,p,C_1)\) & \(\alpha_{1p}\) \\
+\(P(C_1,p,C_2)\) & \(\alpha_{2p}\) \\
+\(P(C_1,p,C_3)\) & \(\alpha_{3p}\) \\
+\(P(C_1,p,L_p)\) & \(\alpha_{4p}\) \\
+\(P(C_1,r,C_1)\) & \(\alpha_{1r}\) \\
+\(P(C_1,r,C_2)\) & \(\alpha_{2r}\) \\
+\(P(C_1,r,L_p)\) & \(\alpha_{3r}\) \\
+\end{longtable}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Parámetros para las probabilidades de \(C_2\)}\tabularnewline
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(P(C_2,p,C_1)\) & \(\beta_{1p}\) \\
+\(P(C_2,p,C_2)\) & \(\beta_{2p}\) \\
+\(P(C_2,p,C_3)\) & \(\beta_{3p}\) \\
+\(P(C_2,p,L_p)\) & \(\beta_{4p}\) \\
+\(P(C_2,r,C_1)\) & \(\beta_{1r}\) \\
+\(P(C_2,r,C_2)\) & \(\beta_{2r}\) \\
+\(P(C_2,r,C_3)\) & \(\beta_{3r}\) \\
+\(P(C_2,r,L_p)\) & \(\beta_{4r}\) \\
+\(P(C_2,t,nG)\) & \(\beta_{1t}\) \\
+\(P(C_2,t,G)\) & \(\beta_{1t}\) \\
+\end{longtable}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Parámetros para las probabilidades de \(C_3\)}\tabularnewline
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Probabilidades & Parámetros \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(P(C_3,p,C_1)\) & \(\gamma_{1p}\) \\
+\(P(C_3,p,C_2)\) & \(\gamma_{2p}\) \\
+\(P(C_3,p,C_3)\) & \(\gamma_{3p}\) \\
+\(P(C_3,p,L_p)\) & \(\gamma_{4p}\) \\
+\(P(C_3,r,C_2)\) & \(\gamma_{1r}\) \\
+\(P(C_3,r,C_3)\) & \(\gamma_{2r}\) \\
+\(P(C_3,r,L_p)\) & \(\gamma_{3r}\) \\
+\(P(C_3,t,nG)\) & \(\gamma_{1t}\) \\
+\(P(C_3,t,G)\) & \(\gamma_{2t}\) \\
+\end{longtable}
 
 \bookmarksetup{startatroot}
 

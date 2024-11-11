@@ -35,7 +35,6 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    - intro.qmd
     - formulacion.qmd
     - modelo.qmd
     - descripcion.qmd

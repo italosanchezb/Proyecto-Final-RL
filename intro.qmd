@@ -2,4 +2,5 @@
 
 This is a book created from markdown and executable code.
 
-See @van2021analyzing for additional discussion of literate programming.
+See @1 for additional discussion of literate programming.
+[-@1]
