@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Dinámica del modelo – Análisis Futbol</title>
+<title>2&nbsp; Dinámica del modelo – Análisis Futbol</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,10 +107,10 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta property="og:title" content="2&nbsp; Dinámica del modelo – Análisis Futbol">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Análisis Futbol">
-<meta name="twitter:title" content="3&nbsp; Dinámica del modelo – Análisis Futbol">
+<meta name="twitter:title" content="2&nbsp; Dinámica del modelo – Análisis Futbol">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -124,7 +124,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelo.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelo.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -178,37 +178,31 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formulacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Formulación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formulación</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descripcion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./justificacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,7 +224,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></h1>
 </div>
 
 
@@ -249,9 +243,11 @@ window.Quarto = {
 
 <p>En el contexto del fútbol llamamos <em>jugada</em> a una sucesión de acciones donde el balón se traslada desde un punto inicial donde el equipo A tiene el balón hasta un punto final que puede ser: perder el balón, tirar a puerta y no anotar gol o tirar y anotar gol.</p>
 <p><em>Ejemplo: El balón comienza en el saque de meta del portero, el portero da un pase a un defensa que se encuentra en el primer tercio, que esté da un pase a un delantero que se encuentra en el tercer tercio y al intentar un regate pierde el balón.</em></p>
-<p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(c_i\)</span> y terminar en alguno de los 3 estados absorbentes. <em>Ejemplo</em> <span class="math display">\[
+<p>En nuestro contexto se verá como el hecho de iniciar la sucesión de acciones desde alguna sección <span class="math inline">\(C_i\)</span> y terminar en alguno de los 3 estados absorbentes.</p>
+<p><em>Ejemplo</em> <span class="math display">\[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
+<p><img src="secuencia de ejemplo.png" class="img-fluid"></p>
 <p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a>, <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> y <a href="https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM">Pumas</a> de la temporada 2023-2024</p>
 <p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
 <ul>
@@ -1060,12 +1056,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./formulacion.html" class="pagination-link" aria-label="Formulación">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Formulación</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formulación</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./descripcion.html" class="pagination-link" aria-label="Descripción y Justificación de la recompensa">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
