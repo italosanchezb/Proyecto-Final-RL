@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -245,22 +225,48 @@ div.csl-indent {
 
 <section id="introducción" class="level1 unnumbered">
 <h1 class="unnumbered">Introducción</h1>
-<p>Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haceremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
+<p>Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
 <p>Además se darán algunas hipótesis para simplificar el modelo sin pérder la escencia del juego.</p>
 <p>Un partido de fútbol se componen de 2 equipos con 11 jugadores cada uno, un balón y un arbitro (o un grupo de arbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 porterias (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la porteria) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
-<p>Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterias.</p>
-<p><span class="citation" data-cites="vanroy2">Van Roy, Robberechts, et&nbsp;al. (<a href="references.html#ref-vanroy2" role="doc-biblioref">2021</a>)</span></p>
-<p><span class="citation" data-cites="vanroy1">(<a href="references.html#ref-vanroy1" role="doc-biblioref">2021</a>)</span></p>
+<p>[Agregar campo de juego con 11 jugadores para cada equipo, Equipo A y Equipo B]</p>
+<p>Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterias, a este jugador se le conoce como portero.</p>
+<p>Un partido consta de 90 minutos divididos en 2 partes de 45 minutos.</p>
+<p>Explicadas las reglas principales vamos a familiarizarnos con el desarrollo de un partido.</p>
+<p>Si bien no existen reglas escritas sobre como se deban acomodar los 11 jugadores en el campo, durante la historia siempre se han acomodado de la siguiente forma:</p>
+<ul>
+<li>El portero siempre se mantiene dentro del área y lo más cercano a la portería.</li>
+<li>Existe un primer grupo llamados defensas que se acomodan delante del portero y son los encargados que el equipo contrario no marque gol.</li>
+<li>Existe un segundo grupo llamados mediocampistas que se acomodan delante de los defensas y que su función es trasladar el balón de los defensas hacia la portería rival.</li>
+<li>Existe un tercer grupo llamados delanteros que son los encargados de recibir los balones de los mediocampistas y tratar de anotar gol.</li>
+</ul>
+<p>[Agregar campo de juego con 4-3-3]</p>
+<p>El problema principal al que nos enfrentamos y por lo cuál el fútbol es tan dificil de analizar es porque las descripciones anteriores son muy generales y muchas veces no se cumplen. Es decir, podemos tener a un defensa o un mediocampista metiendo goles sin necesidad de los delanteros, podemos tener mediocampistas defendiendo o se puede anotar un gol pasando directamente de los defensas o el portero hasta los delanteros. En cuestión de dinámica casi todo está permitido, esto no quiere decir que suceda, sin embargo es muy complicado analizar de forma mecanica cada decisión de los fútbolistas.</p>
+<p>Aún así podemos enlistar ciertas situaciones que no son comunes que pasen y por tanto para nuestro modelo las vamos a ignorar:</p>
+<ul>
+<li>No se anotan goles desde la primera mitad de campo (desde la portería propia hasta el medio campo).</li>
+<li>Los porteros no anotan goles.</li>
+<li>La única forma de anotar gol es mediante una acción que llamamos tiros.</li>
+<li>Cada equipo tiene 11 jugadores.</li>
+</ul>
+<p>También durante el desarrollo de un partido hay múltiples acciones que puede realizar un futbolista, a continuación enlistamos algunas de las acciones:</p>
+<ul>
+<li>pase : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/f-Bw-UaVV4U" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ul>
+<li>tiro : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la porteria contraria.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/si1RC4w-FAI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ul>
+<li>regate : mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mathV4xFUX8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ul>
+<li>centro : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-nI94rkcOwk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-vanroy2" class="csl-entry" role="listitem">
-Van Roy, Maaike, Pieter Robberechts, Wen-Chi Yang, Luc De Raedt, y Jesse Davis. 2021. <span>«Leaving goals on the pitch: Evaluating decision making in soccer»</span>. <em>arXiv preprint arXiv:2104.03252</em>.
-</div>
-<div id="ref-vanroy1" class="csl-entry" role="listitem">
-Van Roy, Maaike, Wen-Chi Yang, Luc De Raedt, y Jesse Davis. 2021. <span>«Analyzing learned markov decision processes using model checking for providing tactical advice in professional soccer»</span>. En <em>AI for Sports Analytics (AISA) Workshop at IJCAI 2021</em>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
