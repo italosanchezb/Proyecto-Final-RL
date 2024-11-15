@@ -245,7 +245,7 @@ div.csl-indent {
 
 <section id="introducción" class="level1 unnumbered">
 <h1 class="unnumbered">Introducción</h1>
-<p>Trabajo basado en <span class="citation" data-cites="vanroy1">Van Roy, Yang, et&nbsp;al. (<a href="references.html#ref-vanroy1" role="doc-biblioref">2021</a>)</span> y <span class="citation" data-cites="vanroy2">Van Roy, Robberechts, et&nbsp;al. (<a href="references.html#ref-vanroy2" role="doc-biblioref">2021</a>)</span>.</p>
+<p>Este trabajo está basado en los trabajos: <span class="citation" data-cites="vanroy1">Van Roy, Yang, et&nbsp;al. (<a href="references.html#ref-vanroy1" role="doc-biblioref">2021</a>)</span> y <span class="citation" data-cites="vanroy2">Van Roy, Robberechts, et&nbsp;al. (<a href="references.html#ref-vanroy2" role="doc-biblioref">2021</a>)</span>.</p>
 <p>Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
 <p>Además se darán algunas hipótesis para simplificar el modelo sin pérder la escencia del juego.</p>
 <p>Un partido de fútbol se componen de 2 equipos con 11 jugadores cada uno, un balón y un arbitro (o un grupo de arbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 porterias (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la porteria) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
@@ -271,21 +271,26 @@ div.csl-indent {
 </ul>
 <p>También durante el desarrollo de un partido hay múltiples acciones que puede realizar un futbolista, a continuación enlistamos algunas de las acciones:</p>
 <ul>
-<li>pase : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.</li>
+<li>pase : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/f-Bw-UaVV4U" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>tiro : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la porteria contraria.</li>
+<li>tiro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la porteria contraria.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/si1RC4w-FAI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>regate : mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.</li>
+<li>regate : Mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mathV4xFUX8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>centro : golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.</li>
+<li>centro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-nI94rkcOwk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Existen muchas más acciones que puede realizar un futbolista, sin embargo las enlistadas anteriormente son las más comunes y muchas se desprenden de ellas.</p>
+<p>Con todo lo anterior podemos dejar claro cuál es el próposito del proyecto.</p>
+<p>Como mencionamos lo más importante durante un partido son los goles, hay que marcar goles y evitar que nos marquen gol. En este proyecto nos centramos en la parte ofensiva, es decir marcar goles. De esta forma nuestro proposito es el de encontrar la mejor forma de mover el balón por el campo que nos haga marcar un gol.</p>
+<p>Para lograr esto se van a hacer algunas hipótesis: * El campo se divide en 3 secciones iguales: Defensa, Mediocampo, Delantera. * Solo se consideran 3 acciones: pase, tiro, regate. * Los jugadores toman decisiones coherentes. * No se consideran: fuera de juego, tiros libres, penales, saques de banda.</p>
+<p>Llamaremos jugada a una serie de acciones y puntulizar que: * Una jugada puede comenzar en cualquier parte del campo. * Una jugada termina cuando realizamos un tiro o cuando perdemos el balón.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
