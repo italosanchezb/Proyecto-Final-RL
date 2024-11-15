@@ -281,7 +281,7 @@ window.Quarto = {
 <p><em>Ejemplo</em> <span class="math display">\[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<div id="771d819e" class="cell" data-execution_count="1">
+<div id="45411ca7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -347,7 +347,7 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <p>En este caso tendremos que <span class="math inline">\(P(C_1,t,C_1)=P(C_1,t,C_2)=P(C_1,t,C_3)=P(C_1,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
 <p><span class="math inline">\(P(C_1,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
 <p><span class="math inline">\(P(C_1,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p>
-<p>Sin embargo, como suponemos que las acciones que toman las futbolistas son razonables, no tiene sentido realizar un <em>tiro</em> desde la zona <span class="math inline">\(C_1\)</span>, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto</p>
+<p>Sin embargo, como suponemos que las acciones que toman las futbolistas son coherentes, no tiene sentido realizar un <em>tiro</em> desde la zona <span class="math inline">\(C_1\)</span>, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto</p>
 <p><span class="math display">\[
   P(C_1,t,S)=0,\hspace{0.5cm}\forall S\in \mathcal{S}.
   \]</span></p></li>
@@ -372,8 +372,8 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <p>De esta lista de probabilidades para la acción <span class="math inline">\(r\)</span> notemos que <span class="math inline">\(P(C_2,r,nG)=P(C_2,r,G)=0\)</span> esto pues la única acción admisible para terminar en los estados <span class="math inline">\(\{nG,G\}\)</span> es <span class="math inline">\(t\)</span>.</p></li>
 <li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
 <p>En este caso tendremos que <span class="math inline">\(P(C_2,t,C_1)=P(C_2,t,C_2)=P(C_2,t,C_3)=P(C_2,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
-<p><span class="math inline">\(P(C_2,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
-<p><span class="math inline">\(P(C_2,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+<p><span class="math inline">\(P(C_2,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_2,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_2\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
 </ul></li>
 <li><p>Fijamos el estado <span class="math inline">\(C_3\)</span></p>
 <ul>
@@ -396,8 +396,8 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 <p>Además <span class="math inline">\(P(C_3,r,C_1)=0\)</span>, pues al realizar un <em>regate</em> solo tenemos dos opciones o nos mantenemos en la zona <span class="math inline">\(C_3\)</span> o retrocedemos a la zona anterior <span class="math inline">\(C_2\)</span>.</p></li>
 <li><p>Consideramos la acción <span class="math inline">\(t\)</span>:</p>
 <p>En este caso tendremos que <span class="math inline">\(P(C_3,t,C_1)=P(C_3,t,C_2)=P(C_3,t,C_3)=P(C_3,t,L_p)=0\)</span> pues después de realizar un <em>tiro</em> solo tendremos dos estados posibles <span class="math inline">\(\{nG,G\}\)</span>.</p>
-<p><span class="math inline">\(P(C_3,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
-<p><span class="math inline">\(P(C_3,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_1\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
+<p><span class="math inline">\(P(C_3,t,nG)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>tiro</em> y no anotar gol.</p>
+<p><span class="math inline">\(P(C_3,t,G)=\)</span> La probabilidad de estar en la zona <span class="math inline">\(C_3\)</span> hacer un <em>tiro</em> y anotar gol.</p></li>
 </ul></li>
 <li><p>Por último como <span class="math inline">\(\{L_p,nG,G\}\)</span> son estados absorbentes, entonces <span class="math inline">\(\forall a\in\mathcal{A}.\)</span></p></li>
 </ul>
