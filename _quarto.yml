@@ -49,9 +49,9 @@ bibliography: references.bib
 format:
   html:
     theme:
-      dark: lux
-      light: lux
-    highlight-style: a11y
+      dark: lumen
+      light: cyborg
+    highlight-style: nord
     lang: es
     html-math-method: mathjax
     grid:
@@ -60,7 +60,7 @@ format:
       margin-width: 300px
       gutter-width: .5rem
     code-copy: true
-    code-fold: true
+    code-fold: true 
   pdf:
     pdf-engine: pdflatex
     lang: es-MX
@@ -73,6 +73,7 @@ format:
     email: joseitalosanchezbermudez@gmail.com
     keep-tex: true
 editor: visual
+jupyter: python3
 
 
 

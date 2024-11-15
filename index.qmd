@@ -1,13 +1,108 @@
 # Introducción {.unnumbered}
+Este trabajo está basado en los trabajos: @vanroy1 y @vanroy2.
 
-Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haceremos algunas puntualizaciones respecto a la naturaleza de un partido.
+Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.
 
 Además se darán algunas hipótesis para simplificar el modelo sin pérder la escencia del juego.
 
 Un partido de fútbol se componen de 2 equipos con 11 jugadores cada uno, un balón y un arbitro (o un grupo de arbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 porterias (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la porteria) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.
 
-Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterias.
+```{python}
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt 
+from mplsoccer import Pitch, FontManager, add_image
+import random 
+pitch = Pitch(line_color='black',linewidth=1)
+fig, ax = pitch.draw()
 
-@vanroy2
+pitch.scatter(random.randint(1,119),random.randint(1,79),color = 'red', ax=ax, label = 'Equipo A')
+pitch.scatter(random.randint(1,119),random.randint(1,79),color = 'blue', ax=ax, label = 'Equipo B')
+for i in range(0,11):
+    pitch.scatter(random.randint(1,119),random.randint(1,79),color = 'red', ax=ax)
+    pitch.scatter(random.randint(1,119),random.randint(1,79),color = 'blue', ax=ax)
 
-[-@vanroy1]
+
+
+ax.legend(shadow=True, loc = 'upper left', ncol=2, facecolor = 'white', edgecolor = 'None')
+```
+
+Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterias, a este jugador se le conoce como portero.
+
+Un partido consta de 90 minutos divididos en 2 partes de 45 minutos.
+
+Explicadas las reglas principales vamos a familiarizarnos con el desarrollo de un partido. 
+
+Si bien no existen reglas escritas sobre como se deban acomodar los 11 jugadores en el campo, durante la historia siempre se han acomodado de la siguiente forma:
+
+* El portero siempre se mantiene dentro del área y lo más cercano a la portería.
+* Existe un primer grupo llamados defensas que se acomodan delante del portero y son los encargados que el equipo contrario no marque gol.
+* Existe un segundo grupo llamados mediocampistas que se acomodan delante de los defensas y que su función es trasladar el balón de los defensas hacia la portería rival.
+* Existe un tercer grupo llamados delanteros que son los encargados de recibir los balones de los mediocampistas y tratar de anotar gol.
+
+```{python}
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt 
+from mplsoccer import Pitch, FontManager, add_image
+import random 
+pitch = Pitch(line_color='black',linewidth=1)
+fig, ax = pitch.draw()
+
+# Portero
+pitch.scatter(10,40,color = 'red', ax=ax)
+
+# Defensas
+for i in range (0,4):
+    a = 10 + i*20
+    pitch.scatter(30,a,color = 'red', ax=ax)
+
+# Mediocampistas
+for i in range (0,3):
+    a = 20 + i*20
+    pitch.scatter(65,a,color = 'red', ax=ax)
+
+# Delanteros
+for i in range (0,3):
+    a = 15 + i*25
+    pitch.scatter(100,a,color = 'red', ax=ax)
+```
+
+El problema principal al que nos enfrentamos y por lo cuál el fútbol es tan dificil de analizar es porque las descripciones anteriores son muy generales y muchas veces no se cumplen. Es decir, podemos tener a un defensa o un mediocampista metiendo goles sin necesidad de los delanteros, podemos tener mediocampistas defendiendo o se puede anotar un gol pasando directamente de los defensas o el portero hasta los delanteros. En cuestión de dinámica casi todo está permitido, esto no quiere decir que suceda, sin embargo es muy complicado analizar de forma mecanica cada decisión de los fútbolistas.
+
+Aún así podemos enlistar ciertas situaciones que no son comunes que pasen y por tanto para nuestro modelo las vamos a ignorar:
+
+* No se anotan goles desde la primera mitad de campo (desde la portería propia hasta el medio campo).
+* Los porteros no anotan goles.
+* La única forma de anotar gol es mediante una acción que llamamos tiros.
+* Cada equipo tiene 11 jugadores.
+
+También durante el desarrollo de un partido hay múltiples acciones que puede realizar un futbolista, a continuación enlistamos algunas de las acciones:
+
+* pase : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.
+{{< video https://www.youtube.com/watch?v=f-Bw-UaVV4U&ab_channel=SportsHD >}}
+* tiro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la porteria contraria.
+{{< video https://www.youtube.com/watch?v=si1RC4w-FAI&ab_channel=90Minutes >}}
+* regate : Mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.
+{{< video https://www.youtube.com/watch?v=mathV4xFUX8&ab_channel=VSVHD >}}
+* centro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.
+{{< video https://www.youtube.com/watch?v=-nI94rkcOwk&t=11s&ab_channel=rom7ooo >}}
+
+Existen muchas más acciones que puede realizar un futbolista, sin embargo las enlistadas anteriormente son las más comunes y muchas se desprenden de ellas.
+
+Con todo lo anterior podemos dejar claro cuál es el próposito del proyecto.
+
+Como mencionamos lo más importante durante un partido son los goles, hay que marcar goles y evitar que nos marquen gol. En este proyecto nos centramos en la parte ofensiva, es decir marcar goles. De esta forma nuestro proposito es el de encontrar la mejor forma de mover el balón por el campo que nos haga marcar un gol. 
+
+Para lograr esto se van a hacer algunas hipótesis:
+
+* El campo se divide en 3 secciones iguales: Defensa, Mediocampo, Delantera.
+* Solo se consideran 3 acciones: pase, tiro, regate.
+* Los jugadores toman decisiones coherentes.
+* No se consideran: fuera de juego, tiros libres, penales, saques de banda.
+
+Llamaremos jugada a una serie de acciones y puntulizar que:
+
+* Una jugada puede comenzar en cualquier parte del campo.
+* Una jugada termina cuando realizamos un tiro o cuando perdemos el balón.
+

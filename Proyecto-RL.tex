@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -215,19 +255,176 @@
 
 \bookmarksetup{startatroot}
 
-\chapter*{Preface}\label{preface}
-\addcontentsline{toc}{chapter}{Preface}
+\chapter*{Introducción}\label{introducciuxf3n}
+\addcontentsline{toc}{chapter}{Introducción}
 
-\markboth{Preface}{Preface}
+\markboth{Introducción}{Introducción}
 
-\bookmarksetup{startatroot}
+Este trabajo está basado en los trabajos: Van Roy, Yang, et~al. (2021) y
+Van Roy, Robberechts, et~al. (2021).
 
-\chapter{Introduction}\label{introduction}
+Para la construcción del Proceso de Decisión de Markov (MDP) del
+planteado en este trabajo, primero debemos recordar algunas reglas
+durante un partido de fútbol para aquellos que no las conozcan y también
+haremos algunas puntualizaciones respecto a la naturaleza de un partido.
 
-This is a book created from markdown and executable code.
+Además se darán algunas hipótesis para simplificar el modelo sin pérder
+la escencia del juego.
 
-See Van Roy et~al. (2021) for additional discussion of literate
-programming.
+Un partido de fútbol se componen de 2 equipos con 11 jugadores cada uno,
+un balón y un arbitro (o un grupo de arbitros). Los equipos se
+posicionan dentro de un terreno de juego que consta de 2 porterias (una
+para cada equipo), el objetivo de cada equipo es anotar un gol (que el
+balón ingrese por completo dentro de la porteria) en la portería del
+equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al
+final del partido el equipo que anote más goles gana y en caso de anotar
+la misma cantidad se considera empate.
+
+{[}Agregar campo de juego con 11 jugadores para cada equipo, Equipo A y
+Equipo B{]}
+
+Para anotar un gol cada jugador puede tocar el balón con cualquier parte
+del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada
+equipo hay un futbolista que puede tomar el balón con las manos dentro
+de las áreas marcadas alrededor de las porterias, a este jugador se le
+conoce como portero.
+
+Un partido consta de 90 minutos divididos en 2 partes de 45 minutos.
+
+Explicadas las reglas principales vamos a familiarizarnos con el
+desarrollo de un partido.
+
+Si bien no existen reglas escritas sobre como se deban acomodar los 11
+jugadores en el campo, durante la historia siempre se han acomodado de
+la siguiente forma:
+
+\begin{itemize}
+\tightlist
+\item
+  El portero siempre se mantiene dentro del área y lo más cercano a la
+  portería.
+\item
+  Existe un primer grupo llamados defensas que se acomodan delante del
+  portero y son los encargados que el equipo contrario no marque gol.
+\item
+  Existe un segundo grupo llamados mediocampistas que se acomodan
+  delante de los defensas y que su función es trasladar el balón de los
+  defensas hacia la portería rival.
+\item
+  Existe un tercer grupo llamados delanteros que son los encargados de
+  recibir los balones de los mediocampistas y tratar de anotar gol.
+\end{itemize}
+
+{[}Agregar campo de juego con 4-3-3{]}
+
+El problema principal al que nos enfrentamos y por lo cuál el fútbol es
+tan dificil de analizar es porque las descripciones anteriores son muy
+generales y muchas veces no se cumplen. Es decir, podemos tener a un
+defensa o un mediocampista metiendo goles sin necesidad de los
+delanteros, podemos tener mediocampistas defendiendo o se puede anotar
+un gol pasando directamente de los defensas o el portero hasta los
+delanteros. En cuestión de dinámica casi todo está permitido, esto no
+quiere decir que suceda, sin embargo es muy complicado analizar de forma
+mecanica cada decisión de los fútbolistas.
+
+Aún así podemos enlistar ciertas situaciones que no son comunes que
+pasen y por tanto para nuestro modelo las vamos a ignorar:
+
+\begin{itemize}
+\tightlist
+\item
+  No se anotan goles desde la primera mitad de campo (desde la portería
+  propia hasta el medio campo).
+\item
+  Los porteros no anotan goles.
+\item
+  La única forma de anotar gol es mediante una acción que llamamos
+  tiros.
+\item
+  Cada equipo tiene 11 jugadores.
+\end{itemize}
+
+También durante el desarrollo de un partido hay múltiples acciones que
+puede realizar un futbolista, a continuación enlistamos algunas de las
+acciones:
+
+\begin{itemize}
+\tightlist
+\item
+  pase : Golpear el balón con el pie, cabeza o alguna otra parte del
+  cuerpo con intención que el balón llegue a un jugador del mismo
+  equipo.
+\end{itemize}
+
+\url{https://www.youtube.com/watch?v=f-Bw-UaVV4U&ab_channel=SportsHD}
+
+\begin{itemize}
+\tightlist
+\item
+  tiro : Golpear el balón con el pie, cabeza o alguna otra parte del
+  cuerpo con intención que el balón ingrese en la porteria contraria.
+\end{itemize}
+
+\url{https://www.youtube.com/watch?v=si1RC4w-FAI&ab_channel=90Minutes}
+
+\begin{itemize}
+\tightlist
+\item
+  regate : Mover el balón de forma que el jugador rival no me lo quite y
+  me haga avanzar o terminar en una posición favorable.
+\end{itemize}
+
+\url{https://www.youtube.com/watch?v=mathV4xFUX8&ab_channel=VSVHD}
+
+\begin{itemize}
+\tightlist
+\item
+  centro : Golpear el balón con el pie, cabeza o alguna otra parte del
+  cuerpo con intención que el balón llegue por el aire a un jugador del
+  mismo equipo.
+\end{itemize}
+
+\url{https://www.youtube.com/watch?v=-nI94rkcOwk&t=11s&ab_channel=rom7ooo}
+
+Existen muchas más acciones que puede realizar un futbolista, sin
+embargo las enlistadas anteriormente son las más comunes y muchas se
+desprenden de ellas.
+
+Con todo lo anterior podemos dejar claro cuál es el próposito del
+proyecto.
+
+Como mencionamos lo más importante durante un partido son los goles, hay
+que marcar goles y evitar que nos marquen gol. En este proyecto nos
+centramos en la parte ofensiva, es decir marcar goles. De esta forma
+nuestro proposito es el de encontrar la mejor forma de mover el balón
+por el campo que nos haga marcar un gol.
+
+Para lograr esto se van a hacer algunas hipótesis:
+
+\begin{itemize}
+\tightlist
+\item
+  El campo se divide en 3 secciones iguales: Defensa, Mediocampo,
+  Delantera.
+\item
+  Solo se consideran 3 acciones: pase, tiro, regate.
+\item
+  Los jugadores toman decisiones coherentes.
+\item
+  No se consideran: fuera de juego, tiros libres, penales, saques de
+  banda.
+\end{itemize}
+
+Llamaremos jugada a una serie de acciones y puntulizar que:
+
+\begin{itemize}
+\tightlist
+\item
+  Una jugada puede comenzar en cualquier parte del campo.
+\item
+  Una jugada termina cuando realizamos un tiro o cuando perdemos el
+  balón.
+\end{itemize}
 
 \bookmarksetup{startatroot}
 
@@ -238,20 +435,55 @@ El Proceso de Decisión de Markov se compone de los siguientes elementos:
 \begin{itemize}
 \tightlist
 \item
-  El conjunto de estados estará conformado por las 3 divisiones del
-  campo \(C_1,C_2,C_3\).
+  El conjunto de estados estará conformado por las siguientes tres
+  divisiones del campo
 \end{itemize}
 
-Además se agregan tres estados absorbentes: + \(L_p =\) pérdida de
-posesión del balón. + \(nG =\) realizar un tiro y que no termine en gol.
-+ \(G =\) realizar un tiro y que termine en gol. De esta forma el
-conjunto de estados \(\mathcal{S}\) queda como
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }
+\ImportTok{from}\NormalTok{ matplotlib.colors }\ImportTok{import}\NormalTok{ to\_rgba}
+\ImportTok{from}\NormalTok{ urllib.request }\ImportTok{import}\NormalTok{ urlopen}
+\ImportTok{from}\NormalTok{ mplsoccer }\ImportTok{import}\NormalTok{ Pitch, FontManager, add\_image}
+\ImportTok{from}\NormalTok{ PIL }\ImportTok{import}\NormalTok{ Image}
 
-\begin{verbatim}
-$$
-\mathcal{S}=\{C_1,C_2,C_3,L_p,nG,G\}
-$$
-\end{verbatim}
+\NormalTok{pitch }\OperatorTok{=}\NormalTok{ Pitch(line\_color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{,linewidth}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ pitch.draw()}
+\NormalTok{pitch.lines(}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{80}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, linewidth }\OperatorTok{=} \DecValTok{1}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax, linestyle }\OperatorTok{=} \StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{pitch.lines(}\DecValTok{80}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{80}\NormalTok{,}\DecValTok{80}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, linewidth }\OperatorTok{=} \DecValTok{1}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax, linestyle }\OperatorTok{=} \StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_1$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_2$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{50}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_3$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{90}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{formulacion_files/figure-pdf/cell-2-output-1.pdf}
+
+Donde \(C_1,C_2,C_3\) representa que el balón se encuentre en alguna de
+las tres divisiones.
+
+Además se agregan tres estados absorbentes:
+
+\begin{itemize}
+\tightlist
+\item
+  \(L_p =\) pérdida de posesión del balón.
+\item
+  \(nG =\) realizar un tiro y que no termine en gol.
+\item
+  \(G =\) realizar un tiro y que termine en gol.
+\end{itemize}
+
+De esta forma el conjunto de estados \(\mathcal{S}\) queda como
+
+\[
+    \mathcal{S}=\{C_1,C_2,C_3,L_p,nG,G\}
+\]
 
 \begin{itemize}
 \item
@@ -305,10 +537,46 @@ que esté da un pase a un delantero que se encuentra en el tercer tercio
 y al intentar un regate pierde el balón.}
 
 En nuestro contexto se verá como el hecho de iniciar la sucesión de
-acciones desde alguna sección \(c_i\) y terminar en alguno de los 3
-estados absorbentes. \emph{Ejemplo} \[
+acciones desde alguna sección \(C_i\) y terminar en alguno de los 3
+estados absorbentes.
+
+\emph{Ejemplo} \[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }
+\ImportTok{from}\NormalTok{ mplsoccer }\ImportTok{import}\NormalTok{ Pitch, FontManager, add\_image}
+
+\NormalTok{pitch }\OperatorTok{=}\NormalTok{ Pitch(line\_color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{,linewidth}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ pitch.draw()}
+\NormalTok{pitch.lines(}\DecValTok{40}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{80}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, linewidth }\OperatorTok{=} \DecValTok{1}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax, linestyle }\OperatorTok{=} \StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{pitch.lines(}\DecValTok{80}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{80}\NormalTok{,}\DecValTok{80}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, linewidth }\OperatorTok{=} \DecValTok{1}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax, linestyle }\OperatorTok{=} \StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_1$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_2$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{50}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$C\_3$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{90}\NormalTok{,}\DecValTok{10}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+
+\NormalTok{pitch.scatter(}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{, color }\OperatorTok{=} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.scatter(}\DecValTok{24}\NormalTok{,}\DecValTok{62}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{,ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.scatter(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{,ax}\OperatorTok{=}\NormalTok{ax)}
+
+\NormalTok{pitch.arrows(}\DecValTok{0}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{62}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, width }\OperatorTok{=} \DecValTok{2}\NormalTok{,label }\OperatorTok{=} \StringTok{\textquotesingle{}Pase\textquotesingle{}}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.arrows(}\DecValTok{24}\NormalTok{,}\DecValTok{62}\NormalTok{,}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, width }\OperatorTok{=} \DecValTok{2}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.arrows(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{,}\DecValTok{88}\NormalTok{,}\DecValTok{46}\NormalTok{,color }\OperatorTok{=} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, width }\OperatorTok{=} \DecValTok{2}\NormalTok{,label }\OperatorTok{=} \StringTok{\textquotesingle{}Regate\textquotesingle{}}\NormalTok{, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{pitch.annotate(text}\OperatorTok{=}\StringTok{\textquotesingle{}$L\_p$\textquotesingle{}}\NormalTok{,xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{89}\NormalTok{,}\DecValTok{47}\NormalTok{),xy}\OperatorTok{=}\NormalTok{(}\DecValTok{84}\NormalTok{,}\DecValTok{45}\NormalTok{),ax}\OperatorTok{=}\NormalTok{ax)}
+
+\NormalTok{ax.legend(shadow}\OperatorTok{=}\VariableTok{True}\NormalTok{, loc }\OperatorTok{=} \StringTok{\textquotesingle{}upper left\textquotesingle{}}\NormalTok{, ncol}\OperatorTok{=}\DecValTok{2}\NormalTok{, facecolor }\OperatorTok{=} \StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{, edgecolor }\OperatorTok{=} \StringTok{\textquotesingle{}None\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{modelo_files/figure-pdf/cell-2-output-1.pdf}
 
 Para movernos de un estado \(S_i\) a un estado \(S_j\) mediante una
 acción \(a_k\) haremos uso de las probabilidades de transición, estas
@@ -661,7 +929,7 @@ acciones}\label{justificaciuxf3n-de-las-acciones}
 
 Las acciones que puede realizar un equipo durante un partido son
 limitadas y se pueden enlistar. Sin embargo para nuestro modelo vamos a
-seleccionar las 3 más importantes que son el \emph{pase, tiro}y
+seleccionar las 3 más importantes que son el \emph{pase, tiro} y
 \emph{regate}.
 
 \begin{itemize}
@@ -685,7 +953,12 @@ seleccionar las 3 más importantes que son el \emph{pase, tiro}y
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\bibitem[\citeproctext]{ref-van2021analyzing}
+\bibitem[\citeproctext]{ref-vanroy2}
+Van Roy, Maaike, Pieter Robberechts, Wen-Chi Yang, Luc De Raedt, y Jesse
+Davis. 2021. {``Leaving goals on the pitch: Evaluating decision making
+in soccer''}. \emph{arXiv preprint arXiv:2104.03252}.
+
+\bibitem[\citeproctext]{ref-vanroy1}
 Van Roy, Maaike, Wen-Chi Yang, Luc De Raedt, y Jesse Davis. 2021.
 {``Analyzing learned markov decision processes using model checking for
 providing tactical advice in professional soccer''}. En \emph{AI for

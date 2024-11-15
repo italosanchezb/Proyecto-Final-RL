@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -41,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -247,7 +281,45 @@ window.Quarto = {
 <p><em>Ejemplo</em> <span class="math display">\[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<p><img src="secuencia de ejemplo.png" class="img-fluid"></p>
+<div id="771d819e" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mplsoccer <span class="im">import</span> Pitch, FontManager, add_image</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pitch <span class="op">=</span> Pitch(line_color<span class="op">=</span><span class="st">'black'</span>,linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> pitch.draw()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>pitch.lines(<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">40</span>,<span class="dv">80</span>,color <span class="op">=</span> <span class="st">'gray'</span>, linewidth <span class="op">=</span> <span class="dv">1</span>, ax<span class="op">=</span>ax, linestyle <span class="op">=</span> <span class="st">'--'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>pitch.lines(<span class="dv">80</span>,<span class="dv">0</span>,<span class="dv">80</span>,<span class="dv">80</span>,color <span class="op">=</span> <span class="st">'gray'</span>, linewidth <span class="op">=</span> <span class="dv">1</span>, ax<span class="op">=</span>ax, linestyle <span class="op">=</span> <span class="st">'--'</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>pitch.annotate(text<span class="op">=</span><span class="st">'$C_1$'</span>,xytext<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>),xy<span class="op">=</span>(<span class="dv">84</span>,<span class="dv">45</span>),ax<span class="op">=</span>ax)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>pitch.annotate(text<span class="op">=</span><span class="st">'$C_2$'</span>,xytext<span class="op">=</span>(<span class="dv">50</span>,<span class="dv">10</span>),xy<span class="op">=</span>(<span class="dv">84</span>,<span class="dv">45</span>),ax<span class="op">=</span>ax)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>pitch.annotate(text<span class="op">=</span><span class="st">'$C_3$'</span>,xytext<span class="op">=</span>(<span class="dv">90</span>,<span class="dv">10</span>),xy<span class="op">=</span>(<span class="dv">84</span>,<span class="dv">45</span>),ax<span class="op">=</span>ax)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>pitch.scatter(<span class="dv">0</span>,<span class="dv">40</span>, color <span class="op">=</span> <span class="st">'red'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>pitch.scatter(<span class="dv">24</span>,<span class="dv">62</span>,color <span class="op">=</span> <span class="st">'red'</span>,ax<span class="op">=</span>ax)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>pitch.scatter(<span class="dv">84</span>,<span class="dv">45</span>,color <span class="op">=</span> <span class="st">'red'</span>,ax<span class="op">=</span>ax)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>pitch.arrows(<span class="dv">0</span>,<span class="dv">40</span>,<span class="dv">24</span>,<span class="dv">62</span>,color <span class="op">=</span> <span class="st">'green'</span>, width <span class="op">=</span> <span class="dv">2</span>,label <span class="op">=</span> <span class="st">'Pase'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>pitch.arrows(<span class="dv">24</span>,<span class="dv">62</span>,<span class="dv">84</span>,<span class="dv">45</span>,color <span class="op">=</span> <span class="st">'green'</span>, width <span class="op">=</span> <span class="dv">2</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>pitch.arrows(<span class="dv">84</span>,<span class="dv">45</span>,<span class="dv">88</span>,<span class="dv">46</span>,color <span class="op">=</span> <span class="st">'blue'</span>, width <span class="op">=</span> <span class="dv">2</span>,label <span class="op">=</span> <span class="st">'Regate'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>pitch.annotate(text<span class="op">=</span><span class="st">'$L_p$'</span>,xytext<span class="op">=</span>(<span class="dv">89</span>,<span class="dv">47</span>),xy<span class="op">=</span>(<span class="dv">84</span>,<span class="dv">45</span>),ax<span class="op">=</span>ax)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>ax.legend(shadow<span class="op">=</span><span class="va">True</span>, loc <span class="op">=</span> <span class="st">'upper left'</span>, ncol<span class="op">=</span><span class="dv">2</span>, facecolor <span class="op">=</span> <span class="st">'white'</span>, edgecolor <span class="op">=</span> <span class="st">'None'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelo_files/figure-html/cell-2-output-1.png" width="662" height="461" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a>, <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> y <a href="https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM">Pumas</a> de la temporada 2023-2024</p>
 <p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
 <ul>

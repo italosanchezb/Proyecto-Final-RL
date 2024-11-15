@@ -11,7 +11,35 @@ $$
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 $$
 
-![](secuencia%20de%20ejemplo.png)
+```{python}
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt 
+from mplsoccer import Pitch, FontManager, add_image
+
+pitch = Pitch(line_color='black',linewidth=1)
+fig, ax = pitch.draw()
+pitch.lines(40,0,40,80,color = 'gray', linewidth = 1, ax=ax, linestyle = '--')
+
+pitch.lines(80,0,80,80,color = 'gray', linewidth = 1, ax=ax, linestyle = '--')
+
+pitch.annotate(text='$C_1$',xytext=(10,10),xy=(84,45),ax=ax)
+pitch.annotate(text='$C_2$',xytext=(50,10),xy=(84,45),ax=ax)
+pitch.annotate(text='$C_3$',xytext=(90,10),xy=(84,45),ax=ax)
+
+pitch.scatter(0,40, color = 'red', ax=ax)
+pitch.scatter(24,62,color = 'red',ax=ax)
+pitch.scatter(84,45,color = 'red',ax=ax)
+
+pitch.arrows(0,40,24,62,color = 'green', width = 2,label = 'Pase', ax=ax)
+pitch.arrows(24,62,84,45,color = 'green', width = 2, ax=ax)
+pitch.arrows(84,45,88,46,color = 'blue', width = 2,label = 'Regate', ax=ax)
+pitch.annotate(text='$L_p$',xytext=(89,47),xy=(84,45),ax=ax)
+
+ax.legend(shadow=True, loc = 'upper left', ncol=2, facecolor = 'white', edgecolor = 'None')
+
+plt.show()
+```
 
 Para movernos de un estado $S_i$ a un estado $S_j$ mediante una acción $a_k$ haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de [FBREF](https://fbref.com/es/) para 4 clubes: [Chivas](https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara), [América](https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America), [Cruz Azul](https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul) y [Pumas](https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM) de la temporada 2023-2024
 
@@ -63,7 +91,7 @@ Primero vamos a interpretar las probabilidades de transición con la finalidad d
 
         $P(C_1,t,G)=$ La probabilidad de estar en la zona $C_1$ hacer un *tiro* y anotar gol.
 
-        Sin embargo, como suponemos que las acciones que toman las futbolistas son razonables, no tiene sentido realizar un *tiro* desde la zona $C_1$, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto
+        Sin embargo, como suponemos que las acciones que toman las futbolistas son coherentes, no tiene sentido realizar un *tiro* desde la zona $C_1$, pues la distancia hacia la porteria contaría es muy lejana y la probabilidad de anotar un gol es prácticamente nula. Por tanto
 
         $$
           P(C_1,t,S)=0,\hspace{0.5cm}\forall S\in \mathcal{S}.
@@ -107,9 +135,9 @@ Primero vamos a interpretar las probabilidades de transición con la finalidad d
 
         En este caso tendremos que $P(C_2,t,C_1)=P(C_2,t,C_2)=P(C_2,t,C_3)=P(C_2,t,L_p)=0$ pues después de realizar un *tiro* solo tendremos dos estados posibles $\{nG,G\}$.
 
-        $P(C_2,t,nG)=$ La probabilidad de estar en la zona $C_1$ hacer un *tiro* y no anotar gol.
+        $P(C_2,t,nG)=$ La probabilidad de estar en la zona $C_2$ hacer un *tiro* y no anotar gol.
 
-        $P(C_2,t,G)=$ La probabilidad de estar en la zona $C_1$ hacer un *tiro* y anotar gol.
+        $P(C_2,t,G)=$ La probabilidad de estar en la zona $C_2$ hacer un *tiro* y anotar gol.
 
 -   Fijamos el estado $C_3$
 
@@ -151,9 +179,9 @@ Primero vamos a interpretar las probabilidades de transición con la finalidad d
 
         En este caso tendremos que $P(C_3,t,C_1)=P(C_3,t,C_2)=P(C_3,t,C_3)=P(C_3,t,L_p)=0$ pues después de realizar un *tiro* solo tendremos dos estados posibles $\{nG,G\}$.
 
-        $P(C_3,t,nG)=$ La probabilidad de estar en la zona $C_1$ hacer un *tiro* y no anotar gol.
+        $P(C_3,t,nG)=$ La probabilidad de estar en la zona $C_3$ hacer un *tiro* y no anotar gol.
 
-        $P(C_3,t,G)=$ La probabilidad de estar en la zona $C_1$ hacer un *tiro* y anotar gol.
+        $P(C_3,t,G)=$ La probabilidad de estar en la zona $C_3$ hacer un *tiro* y anotar gol.
 
 -   Por último como $\{L_p,nG,G\}$ son estados absorbentes, entonces $\forall a\in\mathcal{A}.$
 

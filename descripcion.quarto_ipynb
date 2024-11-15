@@ -1,0 +1,53 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Descripción y Justificación de la recompensa\n",
+        " En un partido de fútbol gana el equipo que anota más goles, en caso de anotar los mismos goles se considera empate y no existe desempate de ningún tipo.[^1] Por lo que la recompensa será la de anotar un gol $R=1$, pues es lo único que puede hacer que un equipo gane un partido. No existe penalización porque los goles válidos anotados no pueden ser descontandos. \n",
+        "\n",
+        " [^1]: No se consideran los partidos de eliminación directa donde existe el desempate por penales.\n"
+      ],
+      "id": "ac873e15"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": " "
+      },
+      "source": [
+        "importnumpy as np \n",
+        "importpandas as pd\n",
+        "importmatplotlib.pyplot as plt \n",
+        "frommatplotlib.colors import to_rgba\n",
+        "fromurllib.request import urlopen\n",
+        "frommplsoccer import Pitch, FontManager, add_image\n",
+        "fromPIL import Image\n",
+        "\n",
+        "pitch= Pitch(line_color='black',linewidth=1)\n",
+        "fig,ax = pitch.draw()\n",
+        "pitch.lines(40,0,40,80,color= 'gray', linewidth = 1, ax=ax, linestyle = '--')\n",
+        "\n",
+        "pitch.lines(80,0,80,80,color= 'gray', linewidth = 1, ax=ax, linestyle = '--')\n",
+        "\n",
+        "pitch.annotate(text='$C_1$',xytext=(10,10),xy=(84,45),ax=ax)\n",
+        "pitch.annotate(text='$C_2$',xytext=(50,10),xy=(84,45),ax=ax)\n",
+        "pitch.annotate(text='$C_3$',xytext=(90,10),xy=(84,45),ax=ax)"
+      ],
+      "id": "cdf3d210",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\josei\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
