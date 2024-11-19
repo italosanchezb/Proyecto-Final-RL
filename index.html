@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Futbol</title>
+<title>Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,10 +131,10 @@ div.csl-indent {
 </script>
 
 
-<meta property="og:title" content="Análisis Futbol">
+<meta property="og:title" content="Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
 <meta property="og:description" content="">
-<meta property="og:site_name" content="Análisis Futbol">
-<meta name="twitter:title" content="Análisis Futbol">
+<meta property="og:site_name" content="Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
+<meta name="twitter:title" content="Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -163,7 +163,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Análisis Futbol</a> 
+      <a href="./">Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="./Proyecto-RL.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
@@ -254,7 +254,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Futbol</h1>
+<h1 class="title">Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol</h1>
 </div>
 
 
@@ -265,7 +265,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14 de febrero de 2024</p>
+      <p class="date">19 de noviembre de 2024</p>
     </div>
   </div>
   
@@ -280,10 +280,10 @@ div.csl-indent {
 <section id="introducción" class="level1 unnumbered">
 <h1 class="unnumbered">Introducción</h1>
 <p>Este trabajo está basado en los trabajos: <span class="citation" data-cites="vanroy1">Van Roy, Yang, et&nbsp;al. (<a href="references.html#ref-vanroy1" role="doc-biblioref">2021</a>)</span> y <span class="citation" data-cites="vanroy2">Van Roy, Robberechts, et&nbsp;al. (<a href="references.html#ref-vanroy2" role="doc-biblioref">2021</a>)</span>.</p>
-<p>Para la construcción del Proceso de Decisión de Markov (MDP) del planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
-<p>Además se darán algunas hipótesis para simplificar el modelo sin pérder la escencia del juego.</p>
-<p>Un partido de fútbol se componen de 2 equipos con 11 jugadores cada uno, un balón y un arbitro (o un grupo de arbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 porterias (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la porteria) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
-<div id="6708c553" class="cell" data-execution_count="1">
+<p>Para la construcción del Proceso de Decisión de Markov (MDP) planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
+<p>Además, se darán algunas hipótesis para simplificar el modelo sin pérder la esencia del juego.</p>
+<p>Un partido de fútbol se compone de 2 equipos con 11 jugadores cada uno, un balón y un árbitro (o un grupo de árbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 portería (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la portería) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
+<div id="840ee6e0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -312,17 +312,17 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterias, a este jugador se le conoce como portero.</p>
+<p>Para anotar un gol cada jugador puede tocar el balón con cualquier parte del cuerpo salvo el brazo, sin embargo, de los 11 jugadores de cada equipo hay un futbolista que puede tomar el balón con las manos dentro de las áreas marcadas alrededor de las porterías, a este jugador se le conoce como portero.</p>
 <p>Un partido consta de 90 minutos divididos en 2 partes de 45 minutos.</p>
 <p>Explicadas las reglas principales vamos a familiarizarnos con el desarrollo de un partido.</p>
-<p>Si bien no existen reglas escritas sobre como se deban acomodar los 11 jugadores en el campo, durante la historia siempre se han acomodado de la siguiente forma:</p>
+<p>Si bien no existen reglas escritas sobre cómo se deban acomodar los 11 jugadores en el campo, durante la historia siempre se han acomodado de la siguiente forma:</p>
 <ul>
 <li>El portero siempre se mantiene dentro del área y lo más cercano a la portería.</li>
 <li>Existe un primer grupo llamados defensas que se acomodan delante del portero y son los encargados que el equipo contrario no marque gol.</li>
 <li>Existe un segundo grupo llamados mediocampistas que se acomodan delante de los defensas y que su función es trasladar el balón de los defensas hacia la portería rival.</li>
 <li>Existe un tercer grupo llamados delanteros que son los encargados de recibir los balones de los mediocampistas y tratar de anotar gol.</li>
 </ul>
-<div id="62f49ed2" class="cell" data-execution_count="2">
+<div id="1ea35a03" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -359,7 +359,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>El problema principal al que nos enfrentamos y por lo cuál el fútbol es tan dificil de analizar es porque las descripciones anteriores son muy generales y muchas veces no se cumplen. Es decir, podemos tener a un defensa o un mediocampista metiendo goles sin necesidad de los delanteros, podemos tener mediocampistas defendiendo o se puede anotar un gol pasando directamente de los defensas o el portero hasta los delanteros. En cuestión de dinámica casi todo está permitido, esto no quiere decir que suceda, sin embargo es muy complicado analizar de forma mecanica cada decisión de los fútbolistas.</p>
+<p>El problema principal al que nos enfrentamos y por lo cual el fútbol es tan difícil de analizar es porque las descripciones anteriores son muy generales y muchas veces no se cumplen. Es decir, podemos tener a un defensa o un mediocampista metiendo goles sin necesidad de los delanteros, podemos tener mediocampistas defendiendo o se puede anotar un gol pasando directamente de los defensas o el portero hasta los delanteros. En cuestión de dinámica casi todo está permitido, esto no quiere decir que suceda, sin embargo, es muy complicado analizar de forma mecánica cada decisión de los futbolistas.</p>
 <p>Aún así podemos enlistar ciertas situaciones que no son comunes que pasen y por tanto para nuestro modelo las vamos a ignorar:</p>
 <ul>
 <li>No se anotan goles desde la primera mitad de campo (desde la portería propia hasta el medio campo).</li>
@@ -367,34 +367,39 @@ div.csl-indent {
 <li>La única forma de anotar gol es mediante una acción que llamamos tiros.</li>
 <li>Cada equipo tiene 11 jugadores.</li>
 </ul>
-<p>También durante el desarrollo de un partido hay múltiples acciones que puede realizar un futbolista, a continuación enlistamos algunas de las acciones:</p>
+<p>También durante el desarrollo de un partido hay múltiples acciones que puede realizar un futbolista, a continuación, enlistamos algunas de las acciones:</p>
 <ul>
-<li>pase : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.</li>
+<li><em>pase</em> : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue a un jugador del mismo equipo.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/f-Bw-UaVV4U" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>tiro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la porteria contraria.</li>
+<li><em>tiro</em> : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón ingrese en la portería contraria.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/si1RC4w-FAI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>regate : Mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.</li>
+<li><em>regate</em> : Mover el balón de forma que el jugador rival no me lo quite y me haga avanzar o terminar en una posición favorable.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mathV4xFUX8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <ul>
-<li>centro : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.</li>
+<li><em>centro</em> : Golpear el balón con el pie, cabeza o alguna otra parte del cuerpo con intención que el balón llegue por el aire a un jugador del mismo equipo.</li>
 </ul>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-nI94rkcOwk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Existen muchas más acciones que puede realizar un futbolista, sin embargo las enlistadas anteriormente son las más comunes y muchas se desprenden de ellas.</p>
-<p>Con todo lo anterior podemos dejar claro cuál es el próposito del proyecto.</p>
-<p>Como mencionamos lo más importante durante un partido son los goles, hay que marcar goles y evitar que nos marquen gol. En este proyecto nos centramos en la parte ofensiva, es decir marcar goles. De esta forma nuestro proposito es el de encontrar la mejor forma de mover el balón por el campo que nos haga marcar un gol.</p>
+<ul>
+<li><em>tackle</em> : Detener el avance de un jugador contrario.</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ZIX8b85FsQ8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Existen muchas más acciones que puede realizar un futbolista, sin embargo, las enlistadas anteriormente son las más comunes y muchas se desprenden de ellas.</p>
+<p>Con todo lo anterior podemos dejar claro cuál es el propósito del proyecto.</p>
+<p>Como mencionamos lo más importante durante un partido son los goles, hay que marcar goles y evitar que nos marquen gol. En este proyecto nos centramos en la parte ofensiva, es decir marcar goles. De esta forma nuestro propósito es el de encontrar la mejor forma de mover el balón por el campo que nos haga marcar un gol.</p>
 <p>Para lograr esto se van a hacer algunas hipótesis:</p>
 <ul>
 <li>El campo se divide en 3 secciones iguales: Defensa, Mediocampo, Delantera.</li>
 <li>Solo se consideran 3 acciones: pase, tiro, regate.</li>
 <li>Los jugadores toman decisiones coherentes.</li>
 <li>No se consideran: fuera de juego, tiros libres, penales, saques de banda.</li>
+<li>Se considera al equipo completo y no a cada jugador individualmente.</li>
 </ul>
-<p>Llamaremos jugada a una serie de acciones y puntulizar que:</p>
+<p>Llamaremos jugada a una serie de acciones y puntualizar que:</p>
 <ul>
 <li>Una jugada puede comenzar en cualquier parte del campo.</li>
 <li>Una jugada termina cuando realizamos un tiro o cuando perdemos el balón.</li>
