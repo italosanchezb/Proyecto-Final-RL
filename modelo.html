@@ -241,6 +241,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./simulacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -258,7 +264,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></h1>
+<h1 class="title"><span id="sec-modelo" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></h1>
 </div>
 
 
@@ -281,7 +287,7 @@ window.Quarto = {
 <p><em>Ejemplo</em> <span class="math display">\[
 C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 \]</span></p>
-<div id="f06c34db" class="cell" data-execution_count="1">
+<div id="8af37eb3" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -320,7 +326,7 @@ C_1\xrightarrow{p}C_1\xrightarrow{p}C_3\xrightarrow{r}L_p.
 </div>
 </div>
 </div>
-<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a>, <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> y <a href="https://fbref.com/es/equipos/c9d59c6c/2023-2024/Estadisticas-de-Pumas-UNAM">Pumas</a> de la temporada 2023-2024</p>
+<p>Para movernos de un estado <span class="math inline">\(S_i\)</span> a un estado <span class="math inline">\(S_j\)</span> mediante una acción <span class="math inline">\(a_k\)</span> haremos uso de las probabilidades de transición, estas probabilidades las estimaremos utilizando datos extraídos de <a href="https://fbref.com/es/">FBREF</a> para 4 clubes: <a href="https://fbref.com/es/equipos/c02b0f7a/2023-2024/Estadisticas-de-Guadalajara">Chivas</a>, <a href="https://fbref.com/es/equipos/18d3c3a3/2023-2024/Estadisticas-de-America">América</a> y <a href="https://fbref.com/es/equipos/632f1838/2023-2024/Estadisticas-de-Cruz-Azul">Cruz Azul</a> de la temporada 2023-2024</p>
 <p>Primero vamos a interpretar las probabilidades de transición con la finalidad de descartar aquellas transciones que no serán posibles con nuestro modelo y con la naturaleza de un partido.</p>
 <ul>
 <li><p>Fijamos el estado <span class="math inline">\(C_1\)</span>.</p>

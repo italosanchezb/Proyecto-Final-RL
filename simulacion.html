@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Simulación – Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./justificacion.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+
+<meta property="og:title" content="5&nbsp; Simulación – Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
+<meta name="twitter:title" content="5&nbsp; Simulación – Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simulacion.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulación</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Evaluación de las decisiones tomadas por un equipo durante un partido de fútbol</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="./Proyecto-RL.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formulacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Formulación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modelo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dinámica del modelo</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./descripcion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Descripción y Justificación de la recompensa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./justificacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulacion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#club-deportido-guadalajara" id="toc-club-deportido-guadalajara" class="nav-link active" data-scroll-target="#club-deportido-guadalajara"><span class="header-section-number">5.1</span> Club Deportido Guadalajara</a></li>
+  <li><a href="#club-américa" id="toc-club-américa" class="nav-link" data-scroll-target="#club-américa"><span class="header-section-number">5.2</span> Club América</a></li>
+  <li><a href="#cruz-azul" id="toc-cruz-azul" class="nav-link" data-scroll-target="#cruz-azul"><span class="header-section-number">5.3</span> Cruz Azul</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulación</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Para completar este trabajo mostramos un código que nos ayuda a encontrar una politica óptima. Esto lo haremos estimando los parametros definidos en la sección <a href="modelo.html" class="quarto-xref"><span>Capítulo 2</span></a> para los 4 equipos (Chivas, América, Cruz Azul).</p>
+<section id="club-deportido-guadalajara" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="club-deportido-guadalajara"><span class="header-section-number">5.1</span> Club Deportido Guadalajara</h2>
+<p>Según datos extraídos de FBREF obtenemos los siguientes parámetros:</p>
+<div id="40ca63d6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.43</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.22</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.20</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.34</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.21</span>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.20</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.07</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.61</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.05</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.47</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.18</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.30</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.78</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.90</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Con esto podemos obtener la política óptima. Además por motivos de simulación agregamos ciertos costo y recompensas para cada estado dependiendo de la acción, esto se me modificará</p>
+<div id="3ce6afe4" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.43</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.22</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.20</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.34</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.21</span>  </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.20</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.07</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.61</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.05</span> </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.47</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.18</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.30</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.78</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.90</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Estados y acciones</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [<span class="st">'c_1'</span>,<span class="st">'c_2'</span>,<span class="st">'c_3'</span>,<span class="st">'lp'</span>,<span class="st">'np'</span>,<span class="st">'gs'</span>]</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>actions <span class="op">=</span> [<span class="st">'p'</span>,<span class="st">'r'</span>,<span class="st">'t'</span>]</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>rewards <span class="op">=</span> {</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="op">-</span><span class="fl">0.1</span>},</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="dv">1</span>}}</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>transition <span class="op">=</span> {</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:alpha_1p,<span class="st">'c_2'</span>:alpha_2p,<span class="st">'c_3'</span>:alpha_3p,<span class="st">'lp'</span>:alpha_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:alpha_1r,<span class="st">'c_2'</span>:alpha_2r,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:alpha_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:beta_1p,<span class="st">'c_2'</span>:beta_2p,<span class="st">'c_3'</span>:beta_3p,<span class="st">'lp'</span>:beta_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:beta_1r,<span class="st">'c_2'</span>:beta_2r,<span class="st">'c_3'</span>:beta_3r,<span class="st">'lp'</span>:beta_4r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:beta_1t,<span class="st">'gs'</span>:beta_2t}},</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:gamma_1p,<span class="st">'c_2'</span>:gamma_2p,<span class="st">'c_3'</span>:gamma_3p,<span class="st">'lp'</span>:gamma_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:gamma_1r,<span class="st">'c_3'</span>:gamma_2r,<span class="st">'lp'</span>:gamma_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:gamma_1t,<span class="st">'gs'</span>:gamma_2t}},</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>}}}</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para Value Iteration</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> value_iteration():</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> {s: <span class="dv">0</span> <span class="cf">for</span> s <span class="kw">in</span> states}</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    cont <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="va">True</span> <span class="kw">and</span> cont<span class="op">&lt;</span><span class="dv">10000</span>):</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        new_V <span class="op">=</span> {}</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            values <span class="op">=</span> []</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>                value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>                    value <span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#print(value)</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>                values.append(value)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(values)    </span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>            new_V[s]<span class="op">=</span> <span class="bu">max</span>(values)</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(f'nuevo vector {new_V}')</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">all</span>(<span class="bu">abs</span>(V[s]<span class="op">-</span>new_V[s])<span class="op">&lt;</span><span class="fl">0.0001</span> <span class="cf">for</span> s <span class="kw">in</span> states):</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> new_V</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>        cont <span class="op">=</span> cont <span class="op">+</span> <span class="dv">1</span> </span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        V <span class="op">=</span> new_V</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> V</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> value_iteration()        </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Política óptima</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>policy <span class="op">=</span> {}</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> []</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>            value<span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>        values.append(value)</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    policy[s] <span class="op">=</span> actions[np.argmax(values)]</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Política Óptima'</span>)</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(policy)</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización de los valores de política</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>policy_values <span class="op">=</span> np.zeros((<span class="bu">len</span>(states),<span class="bu">len</span>(actions)))</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(states):</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, a <span class="kw">in</span> <span class="bu">enumerate</span>(actions):</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        policy_values[i, j] <span class="op">=</span> rewards[s][a] <span class="op">+</span> <span class="bu">sum</span>(transition[s][a][s2] <span class="op">*</span> V[s2] <span class="cf">for</span> s2 <span class="kw">in</span> states)</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>plt.imshow(policy_values, cmap<span class="op">=</span><span class="st">"Greys"</span>, aspect<span class="op">=</span><span class="st">"auto"</span>)</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(actions)), labels<span class="op">=</span>actions)</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>plt.yticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(states)), labels<span class="op">=</span>states)</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">"Valor"</span>)</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Valores de la Política Óptima"</span>)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Política Óptima
+{'c_1': 'p', 'c_2': 't', 'c_3': 't', 'lp': 't', 'np': 'p', 'gs': 't'}</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="simulacion_files/figure-html/cell-3-output-2.png" width="570" height="434" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="club-américa" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="club-américa"><span class="header-section-number">5.2</span> Club América</h2>
+<p>Según datos extraídos de FBREF obtenemos los siguientes parámetros:</p>
+<div id="e1a8de83" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.59</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.27</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.02</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.54</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.39</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.07</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.45</span>  </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.29</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.24</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.16</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.004</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.996</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.09</span> </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.58</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.76</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.17</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.83</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Con esto podemos obtener la política óptima. Además por motivos de simulación agregamos ciertos costo y recompensas para cada estado dependiendo de la acción.</p>
+<div id="a24f972d" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.59</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.27</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.02</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.54</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.39</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.07</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.45</span>  </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.29</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.24</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.16</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.31</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.004</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.996</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.09</span> </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.58</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.76</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.17</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.83</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Estados y acciones</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [<span class="st">'c_1'</span>,<span class="st">'c_2'</span>,<span class="st">'c_3'</span>,<span class="st">'lp'</span>,<span class="st">'np'</span>,<span class="st">'gs'</span>]</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>actions <span class="op">=</span> [<span class="st">'p'</span>,<span class="st">'r'</span>,<span class="st">'t'</span>]</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>rewards <span class="op">=</span> {</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="op">-</span><span class="fl">0.1</span>},</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="dv">1</span>}}</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>transition <span class="op">=</span> {</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:alpha_1p,<span class="st">'c_2'</span>:alpha_2p,<span class="st">'c_3'</span>:alpha_3p,<span class="st">'lp'</span>:alpha_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:alpha_1r,<span class="st">'c_2'</span>:alpha_2r,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:alpha_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:beta_1p,<span class="st">'c_2'</span>:beta_2p,<span class="st">'c_3'</span>:beta_3p,<span class="st">'lp'</span>:beta_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:beta_1r,<span class="st">'c_2'</span>:beta_2r,<span class="st">'c_3'</span>:beta_3r,<span class="st">'lp'</span>:beta_4r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:beta_1t,<span class="st">'gs'</span>:beta_2t}},</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:gamma_1p,<span class="st">'c_2'</span>:gamma_2p,<span class="st">'c_3'</span>:gamma_3p,<span class="st">'lp'</span>:gamma_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:gamma_1r,<span class="st">'c_3'</span>:gamma_2r,<span class="st">'lp'</span>:gamma_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:gamma_1t,<span class="st">'gs'</span>:gamma_2t}},</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>}}}</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para Value Iteration</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> value_iteration():</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> {s: <span class="dv">0</span> <span class="cf">for</span> s <span class="kw">in</span> states}</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    cont <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="va">True</span> <span class="kw">and</span> cont<span class="op">&lt;</span><span class="dv">10000</span>):</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>        new_V <span class="op">=</span> {}</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>            values <span class="op">=</span> []</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>                value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>                    value <span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#print(value)</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>                values.append(value)</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(values)    </span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>            new_V[s]<span class="op">=</span> <span class="bu">max</span>(values)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(f'nuevo vector {new_V}')</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">all</span>(<span class="bu">abs</span>(V[s]<span class="op">-</span>new_V[s])<span class="op">&lt;</span><span class="fl">0.0001</span> <span class="cf">for</span> s <span class="kw">in</span> states):</span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> new_V</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>        cont <span class="op">=</span> cont <span class="op">+</span> <span class="dv">1</span> </span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>        V <span class="op">=</span> new_V</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> V</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> value_iteration()        </span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Política óptima</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>policy <span class="op">=</span> {}</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> []</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>            value<span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>        values.append(value)</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    policy[s] <span class="op">=</span> actions[np.argmax(values)]</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Política Óptima'</span>)</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(policy)</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización de los valores de política</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>policy_values <span class="op">=</span> np.zeros((<span class="bu">len</span>(states),<span class="bu">len</span>(actions)))</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(states):</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, a <span class="kw">in</span> <span class="bu">enumerate</span>(actions):</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        policy_values[i, j] <span class="op">=</span> rewards[s][a] <span class="op">+</span> <span class="bu">sum</span>(transition[s][a][s2] <span class="op">*</span> V[s2] <span class="cf">for</span> s2 <span class="kw">in</span> states)</span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>plt.imshow(policy_values, cmap<span class="op">=</span><span class="st">"Greys"</span>, aspect<span class="op">=</span><span class="st">"auto"</span>)</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(actions)), labels<span class="op">=</span>actions)</span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>plt.yticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(states)), labels<span class="op">=</span>states)</span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">"Valor"</span>)</span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Valores de la Política Óptima"</span>)</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Política Óptima
+{'c_1': 'p', 'c_2': 't', 'c_3': 't', 'lp': 't', 'np': 'p', 'gs': 't'}</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="simulacion_files/figure-html/cell-5-output-2.png" width="570" height="434" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cruz-azul" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="cruz-azul"><span class="header-section-number">5.3</span> Cruz Azul</h2>
+<p>Según datos extraídos de FBREF obtenemos los siguientes parámetros:</p>
+<div id="ae872e95" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.63</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.29</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.41</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.33</span>  </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.11</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.009</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.991</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.10</span> </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.37</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.34</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.21</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.09</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.70</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.92</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Con esto podemos obtener la política óptima. Además por motivos de simulación agregamos ciertos costo y recompensas para cada estado dependiendo de la acción.</p>
+<div id="afda325a" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros de transición y recompensas</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># C_1</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>alpha_1p <span class="op">=</span> <span class="fl">0.63</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>alpha_2p <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>alpha_3p <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>alpha_4p <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>alpha_1r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>alpha_2r <span class="op">=</span> <span class="fl">0.29</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>alpha_3r <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># C_2</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>beta_1p <span class="op">=</span> <span class="fl">0.41</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>beta_2p <span class="op">=</span> <span class="fl">0.33</span>  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>beta_3p <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>beta_4p <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>beta_1r <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>beta_2r <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>beta_3r <span class="op">=</span> <span class="fl">0.11</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>beta_4r <span class="op">=</span> <span class="fl">0.52</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>beta_1t <span class="op">=</span> <span class="fl">0.009</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>beta_2t <span class="op">=</span> <span class="fl">0.991</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># C_3</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>gamma_1p <span class="op">=</span> <span class="fl">0.10</span> </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>gamma_2p <span class="op">=</span> <span class="fl">0.37</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>gamma_3p <span class="op">=</span> <span class="fl">0.19</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>gamma_4p <span class="op">=</span> <span class="fl">0.34</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>gamma_1r <span class="op">=</span> <span class="fl">0.21</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>gamma_2r <span class="op">=</span> <span class="fl">0.09</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>gamma_3r <span class="op">=</span> <span class="fl">0.70</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>gamma_1t <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>gamma_2t <span class="op">=</span> <span class="fl">0.92</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Estados y acciones</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [<span class="st">'c_1'</span>,<span class="st">'c_2'</span>,<span class="st">'c_3'</span>,<span class="st">'lp'</span>,<span class="st">'np'</span>,<span class="st">'gs'</span>]</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>actions <span class="op">=</span> [<span class="st">'p'</span>,<span class="st">'r'</span>,<span class="st">'t'</span>]</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>rewards <span class="op">=</span> {</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:<span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="fl">0.2</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'r'</span>:<span class="op">-</span><span class="fl">0.1</span>,<span class="st">'t'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="op">-</span><span class="fl">0.1</span>},</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:<span class="dv">0</span>,<span class="st">'r'</span>:<span class="dv">0</span>,<span class="st">'t'</span>:<span class="dv">1</span>}}</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>transition <span class="op">=</span> {</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_1'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:alpha_1p,<span class="st">'c_2'</span>:alpha_2p,<span class="st">'c_3'</span>:alpha_3p,<span class="st">'lp'</span>:alpha_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:alpha_1r,<span class="st">'c_2'</span>:alpha_2r,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:alpha_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_2'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:beta_1p,<span class="st">'c_2'</span>:beta_2p,<span class="st">'c_3'</span>:beta_3p,<span class="st">'lp'</span>:beta_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:beta_1r,<span class="st">'c_2'</span>:beta_2r,<span class="st">'c_3'</span>:beta_3r,<span class="st">'lp'</span>:beta_4r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:beta_1t,<span class="st">'gs'</span>:beta_2t}},</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c_3'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:gamma_1p,<span class="st">'c_2'</span>:gamma_2p,<span class="st">'c_3'</span>:gamma_3p,<span class="st">'lp'</span>:gamma_4p,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:gamma_1r,<span class="st">'c_3'</span>:gamma_2r,<span class="st">'lp'</span>:gamma_3r,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:gamma_1t,<span class="st">'gs'</span>:gamma_2t}},</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lp'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">1</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">'np'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>},</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">1</span>,<span class="st">'gs'</span>:<span class="dv">0</span>}},</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gs'</span>:{<span class="st">'p'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>           <span class="st">'r'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>},</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>           <span class="st">'t'</span>:{<span class="st">'c_1'</span>:<span class="dv">0</span>,<span class="st">'c_2'</span>:<span class="dv">0</span>,<span class="st">'c_3'</span>:<span class="dv">0</span>,<span class="st">'lp'</span>:<span class="dv">0</span>,<span class="st">'np'</span>:<span class="dv">0</span>,<span class="st">'gs'</span>:<span class="dv">1</span>}}}</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para Value Iteration</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> value_iteration():</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> {s: <span class="dv">0</span> <span class="cf">for</span> s <span class="kw">in</span> states}</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>    cont <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="va">True</span> <span class="kw">and</span> cont<span class="op">&lt;</span><span class="dv">10000</span>):</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>        new_V <span class="op">=</span> {}</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>            values <span class="op">=</span> []</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>                value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>                    value <span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#print(value)</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>                values.append(value)</span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(values)    </span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>            new_V[s]<span class="op">=</span> <span class="bu">max</span>(values)</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(f'nuevo vector {new_V}')</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">all</span>(<span class="bu">abs</span>(V[s]<span class="op">-</span>new_V[s])<span class="op">&lt;</span><span class="fl">0.0001</span> <span class="cf">for</span> s <span class="kw">in</span> states):</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> new_V</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>        cont <span class="op">=</span> cont <span class="op">+</span> <span class="dv">1</span> </span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>        V <span class="op">=</span> new_V</span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> V</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> value_iteration()        </span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Política óptima</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>policy <span class="op">=</span> {}</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> states:</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> []</span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> actions:</span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> rewards[s][a]</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s2 <span class="kw">in</span> states:</span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>            value<span class="op">+=</span> transition[s][a][s2] <span class="op">*</span> V[s2]</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>        values.append(value)</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>    policy[s] <span class="op">=</span> actions[np.argmax(values)]</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Política Óptima'</span>)</span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(policy)</span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización de los valores de política</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>policy_values <span class="op">=</span> np.zeros((<span class="bu">len</span>(states),<span class="bu">len</span>(actions)))</span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(states):</span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, a <span class="kw">in</span> <span class="bu">enumerate</span>(actions):</span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>        policy_values[i, j] <span class="op">=</span> rewards[s][a] <span class="op">+</span> <span class="bu">sum</span>(transition[s][a][s2] <span class="op">*</span> V[s2] <span class="cf">for</span> s2 <span class="kw">in</span> states)</span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a>plt.imshow(policy_values, cmap<span class="op">=</span><span class="st">"Greys"</span>, aspect<span class="op">=</span><span class="st">"auto"</span>)</span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(actions)), labels<span class="op">=</span>actions)</span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>plt.yticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(states)), labels<span class="op">=</span>states)</span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">"Valor"</span>)</span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Valores de la Política Óptima"</span>)</span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Política Óptima
+{'c_1': 'p', 'c_2': 't', 'c_3': 't', 'lp': 't', 'np': 'p', 'gs': 't'}</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="simulacion_files/figure-html/cell-7-output-2.png" width="570" height="434" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./justificacion.html" class="pagination-link" aria-label="Justificación de las acciones">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Justificación de las acciones</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

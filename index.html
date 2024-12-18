@@ -231,6 +231,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./simulacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Simulación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -280,10 +286,10 @@ div.csl-indent {
 <section id="introducción" class="level1 unnumbered">
 <h1 class="unnumbered">Introducción</h1>
 <p>Este trabajo está basado en los trabajos: <span class="citation" data-cites="vanroy1">Van Roy, Yang, et&nbsp;al. (<a href="references.html#ref-vanroy1" role="doc-biblioref">2021</a>)</span> y <span class="citation" data-cites="vanroy2">Van Roy, Robberechts, et&nbsp;al. (<a href="references.html#ref-vanroy2" role="doc-biblioref">2021</a>)</span>.</p>
-<p>Para la construcción del Proceso de Decisión de Markov (MDP) planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también haremos algunas puntualizaciones respecto a la naturaleza de un partido.</p>
+<p>Para la construcción del Proceso de Decisión de Markov (MDP) planteado en este trabajo, primero debemos recordar algunas reglas durante un partido de fútbol para aquellos que no las conozcan y también hacer algunas puntualizaciones respecto a la naturaleza de un partido.</p>
 <p>Además, se darán algunas hipótesis para simplificar el modelo sin pérder la esencia del juego.</p>
-<p>Un partido de fútbol se compone de 2 equipos con 11 jugadores cada uno, un balón y un árbitro (o un grupo de árbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 portería (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la portería) en la portería del equipo contrario. Por cada gol un equipo recibe lo que sería 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
-<div id="0a54644b" class="cell" data-execution_count="1">
+<p>Un partido de fútbol se compone de 2 equipos con 11 jugadores cada uno, un balón y un árbitro (o un grupo de árbitros). Los equipos se posicionan dentro de un terreno de juego que consta de 2 portería (una para cada equipo), el objetivo de cada equipo es anotar un gol (que el balón ingrese por completo dentro de la portería) en la portería del equipo contrario. Por cada gol un equipo recibe lo equivalente a 1 punto, al final del partido el equipo que anote más goles gana y en caso de anotar la misma cantidad se considera empate.</p>
+<div id="bcc88e4f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -322,7 +328,7 @@ div.csl-indent {
 <li>Existe un segundo grupo llamados mediocampistas que se acomodan delante de los defensas y que su función es trasladar el balón de los defensas hacia la portería rival.</li>
 <li>Existe un tercer grupo llamados delanteros que son los encargados de recibir los balones de los mediocampistas y tratar de anotar gol.</li>
 </ul>
-<div id="c30734dd" class="cell" data-execution_count="2">
+<div id="0dd82a0c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
